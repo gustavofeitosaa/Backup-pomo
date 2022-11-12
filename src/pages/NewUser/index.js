@@ -1,6 +1,6 @@
 //poderiamos apenas copiar e colar todo cod da tela de login pois a de NewUser será mt parecida, porém, poderia da mais trabalho dps, então, vamos recriar do zero!
 import React, { useState } from "react";
-import { KeyboardAvoidingView, Text, View, TextInput, TouchableOpacity } from "react-native";
+import { KeyboardAvoidingView, Text, View, TextInput, TouchableOpacity, ImageBackground } from "react-native";
 
 import firebase from "../../config/firebaseconfig";
 import styles from "./style";
@@ -39,7 +39,9 @@ export default function NewUser ({ navigation }) {
         });
     }
 
-    return <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container} >
+    return <ImageBackground source={require("../../../assets/background.png")} style={{flex: 1, paddingBottom: 60,}}>
+
+    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container} >
         <Text style={styles.title}>Create a PomoTimer account</Text>
         <TextInput 
             style={styles.input} 
@@ -77,7 +79,7 @@ export default function NewUser ({ navigation }) {
                 <Text style={styles.textButtonRegister}>Register</Text>
             </TouchableOpacity>
         :
-            <TouchableOpacity style={styles.buttonRegister} onPress={register}>
+        <TouchableOpacity style={styles.buttonRegister} onPress={register}>
                 <Text style={styles.textButtonRegister}>Register</Text>
             </TouchableOpacity>
         }    
@@ -90,4 +92,5 @@ export default function NewUser ({ navigation }) {
             {/* É legal fazer uma view no final do componente, para quando o teclado subir e por causa do KeyboardAvoidingView, ficar ainda uma margem e n ficar rente aos campos */}
             <View style={{height:10}}/>
     </KeyboardAvoidingView>
+    </ImageBackground>
 }

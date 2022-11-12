@@ -11,11 +11,14 @@ class PomodoroTimer extends React.Component {
 			workTime: 25,
 			breakTime: 5,
 			intervalType : "Working",
+			points: 0,
 		}
 	}
 
 	// handles completion of timer
 	handleTimerCompleted = () => {
+		let contador = this.state.points + 1;
+
 		if(this.state.intervalType === "Working")
 		{
 			this.setState({
@@ -25,8 +28,10 @@ class PomodoroTimer extends React.Component {
 		else
 		{
 			this.setState({
-				intervalType: "Working"
-			})	
+				intervalType: "Working",
+				points: contador,
+			})
+			console.log(this.state.points);	
 		}
 	}
 
@@ -196,6 +201,9 @@ class PomodoroTimer extends React.Component {
 
 					</View>
 				</View>
+				{/* <View style={{backgroundColor: "black", width: "40%", marginRight: "auto", marginLeft: "auto", }}>
+					<Text style={{marginRight: "auto", marginLeft: "auto", backgroundColor: "#EB8258", borderRadius: 17, borderWidth: 2, padding: 10}}>Contador: {this.state.points}</Text>
+				</View> */}
 				<Timer
 					intervalType={this.state.intervalType}
 					Oncomplete={this.handleTimerCompleted}

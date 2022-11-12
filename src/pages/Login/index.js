@@ -1,8 +1,10 @@
-import { View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform, ImageBackground, Image } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform, ImageBackground, Image, Animated, Keyboard } from "react-native";
 // oq q a propriedade KeyBoardAvoidingView faz -> nos iremos centralizar os inputs e os botôes e quando abrir o teclado ele vai empurrar pra cima , com isso é facil de configurar e se torna bem tranquilo, pq a gnt cria o login e o teclado vai ficar todo sobre nosso formulario/input/botão. Automaticamente ao importar esta propriedade ele vai subir, evitando ese problema
 
+//irei importar um Listener pra saber se ele ta aberto ou fechado, e se tiver aberto fazer alguma coisa, se tiver fechado fazer outra
+
 //vamos importar o firebase para ter nossa função
-import firebase from "../../config/firebaseconfig";
+import firebase from "../../config/firebaseconfig"; 
 
 import styles from "./style"; //veja se é padrão 
 //nos vamos usar um icon aqui, então quando o usuario tentar se logar e der erro, a gnt vai devolver um ícone de error e a gnt vai avisar a ele: senha ou email estão inválidos 
@@ -23,6 +25,10 @@ export default function Login ({ navigation }) {
     //e se o usuario tentar logar com a Senha(password) em branco, a gnt pode adicionar um Error aqui tb:
     const [errorLogin, setErrorLogin] = useState("");
     //esses states irão ajudar a gnt a controlar o q a gnt vai precisar 
+
+    const [offset] = useState(new Animated.ValueXY({x: 0, y: 95}));
+    const [opacity] = useState(new Animated.Value(0));
+    const [logo] = useState(new Animated.ValueXY({x: 350, y: 200}))
 
     //nossa função de login deixaremos ja pronta aqui:
     const loginFirebase = () => {
@@ -90,6 +96,24 @@ export default function Login ({ navigation }) {
         //   // ...
         // }
       });
+      //irei importar um Listener pra saber se ele ta aberto ou fechado, e se tiver aberto fazer alguma coisa, se tiver fechado fazer outra
+      keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', keyboardDidShow); //o nome da função q vou dar pra gente saber quando tiver aberto fazer alguma coisa é keyboardDidShow      Basicamente essa função será exuctada quando meu teclado estiver aberto
+      keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', keyboardDidHide); // essa quando meu teclado estiver fechado
+    
+
+      Animated.parallel([
+          Animated.spring(offset.y, {
+            toValue: 0,
+            speed: 4,  //4
+            useNativeDriver: true,
+            bounciness: 20,
+          }),
+          Animated.timing(opacity, {
+            toValue: 1, 
+            duration: 200, //200
+            useNativeDriver: true,
+          })
+      ]).start();
     }, []);//toda vez q o status do meu email mudar eu posso colocar ele dentro do meu useEffect [email]
     //uma propriedade q precisamos passar para dentro do KeyboardAvoidingView, q pede na documentação, é uma propriedade chamada behavior
     //e a gnt vai fazer pra cada plataforma um pouco diferente pra funcionar melhor
@@ -99,29 +123,76 @@ export default function Login ({ navigation }) {
     //Pra isso nos precisamos fazer o onChangeText pra toda vez q a gnt tiver o onChangeText a gnt vai passar o text retorne então o setEmail(e passamos para setar o email o text novamente). assim nos temos o nosso onchangetect implementado
     //temos q passar uma propriedade para o password, q é q toda vez q alguem for digitar ele n pode exibir o texto como no email, ele tem q mostrar o caractere oculto, caractere de segurança! SecurityTextEntry
     //cada um devolvendo o state referendo a ele mesmo. OK!
-    return  <ImageBackground source={require("../../../assets/background.png")} style={{flex: 1}}>
-    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container} >
+
+    function keyboardDidShow(){
+        Animated.parallel([
+            Animated.timing(logo.x, {
+                toValue: 155,
+                duration: 100, //milisegundos
+                useNativeDriver: false,
+            }),
+            Animated.timing(logo.y, {
+                toValue: 195,
+                duration: 100, //milisegundos
+                useNativeDriver: false,
+            }),
+        ]).start();
+    }
+
+    function keyboardDidHide(){
+        Animated.parallel([
+            Animated.timing(logo.x, {
+                toValue: 350,
+                duration: 100, //milisegundos
+                useNativeDriver: false,
+            }),
+            Animated.timing(logo.y, {
+                toValue: 200,
+                duration: 100, //milisegundos
+                useNativeDriver: false,
+            }),
+        ]).start();
+    }
+
+    return  <ImageBackground source={require("../../../assets/background.png")} style={{flex: 1, paddingBottom: 60,}}>
         <StatusBar/>
-       <View>
-            <Image source={require("../../../assets/logo.png")} style={{width: 350, height: 200, backgroundColor:"transparent"}}/>
+       <View style={styles.containerLogo}>
+            <Animated.Image source={require("../../../assets/logo.png")} style={{width: logo.x, height: logo.y, backgroundColor:"transparent"}}/>
        </View>
 
         {/* <Text style={styles.title}>PomoTimer</Text> */}
-        <TextInput 
-            style={styles.input} 
-            placeholder='enter your email'
-            type='text'
-            onChangeText={(text) => setEmail(text)}
-            value={email}
+        
+        {/* Agora q botei o Animated na minha View, eu posso animar o estilo dessa view!
+        dentro dos estilos eu passo [] e dentro deles o q eu to querendo animar */}
+        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container} >
+        <Animated.View style={[styles.containerInputs, {
+            //como eu quero q ela venha de baixo pra cima, como se fosse um efeito dela subindo até onde ela está, então temos q usar o transform pra podermos mexer no eixo Y
+            //dentro do translateY tenho q colocar o valor q eu quero q seja animado , n um valor fixo e sim um valor dinâmico 
+            opacity: opacity,
+            transform: [
+                { translateY: offset.y }
+            ]
+        }]}>
+            <Text style={{ width: "90%", paddingBottom: 5, paddingLeft: 10, color: "#838383", fontSize: 17}}>E-mail</Text>
+            <TextInput 
+                style={styles.input} 
+                placeholder='digite seu endereço de e-mail'
+                // o autoCorrect serve para o nosso corretor n funcionar, n corrigir nada, quando estiver digitando o email
+                autoCorrect={false} 
+                type='text'
+                onChangeText={(text) => setEmail(text)}
+                value={email}
+                secureTextEntry={false}
+                />
+            <Text style={{ width: "90%", paddingBottom: 5, paddingLeft: 10, color: "#838383", fontSize: 17}}>Senha</Text>
+            <TextInput
+                style={styles.input} 
+                secureTextEntry={true}
+                placeholder='digite sua senha'
+                type='text'
+                onChangeText={(text) => setPassword(text)}
+                value={password}
             />
-        <TextInput
-            style={styles.input} 
-            secureTextEntry={true}
-            placeholder='enter a password'
-            type='text'
-            onChangeText={(text) => setPassword(text)}
-            value={password}
-        />
         {/* o q vamos precisar ao clicar no nosso botão? se os inputs estiverem vazio e clicar no botão nos queremos invalidar, devolver um erro para o usuario. Se o usuario tentar enviar e tiver um erro então a gnt vai exibir email e senha invalido, e quando estiver vazio na vamos disponibilizar o botao!
         vamos primeiro quando ele enviar e retornar invalido, criar essa parte aqui, a gnt pode verificar se o erro */}
         {/* se o ErrorLogin for igual a true (logo em seguida) podemos fazer uma verificação-> se for true a gnt faz esse se n a gnt faz esse
@@ -146,21 +217,22 @@ export default function Login ({ navigation }) {
         {   email === "" || password === "" 
         ?
         <TouchableOpacity disabled={true} style={styles.buttonLogin}>
-                <Text style={styles.textButtonLogin}>Login</Text>
+                <Text style={styles.textButtonLogin}>Entrar</Text>
             </TouchableOpacity>
         :
         <TouchableOpacity style={styles.buttonLogin} onPress={loginFirebase}>
-                <Text style={styles.textButtonLogin}>Login</Text>
+                <Text style={styles.textButtonLogin}>Entrar</Text>
             </TouchableOpacity>
         } 
         {/* com isso ja temos o nosso botão de login implementado com nossa funcionalidade de validação dos campos. Logo abaixo do botão teremos esse textozinho: */}
         <Text style={styles.registration}>
-            don't have a registration?
-            <Text style={styles.linkSubscribe} onPress={() => navigation.navigate("NewUser")}> subscribe now...</Text> 
+            {/* don't have a registration? */}
+            <Text style={styles.linkSubscribe} onPress={() => navigation.navigate("NewUser")}>Cadastra-se</Text> 
             {/* essa linha acima será um Link para o NewUser */}
         </Text>
+        </Animated.View>
             {/* É legal fazer uma view no final do componente, para quando o teclado subir e por causa do KeyboardAvoidingView, ficar ainda uma margem e n ficar rente aos campos */}
-            <View style={{height:10}}/>
+            {/* <View style={{height: 0}}/> */}
     </KeyboardAvoidingView>
         </ImageBackground>
 }

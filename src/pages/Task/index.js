@@ -1,12 +1,13 @@
 import React, { useState, useEffect }  from "react";
-import { SafeAreaView, View, Text, TouchableOpacity, FlatList, Image } from "react-native";
+import { SafeAreaView, View, Text, TouchableOpacity, FlatList, Image, Alert, Button } from "react-native";
 import PomoIcon from "../../../assets/icon_tela_pomo.png"
 //import database from "../../config/firebaseconfig";
 // import { database } from "../../config/firebaseconfig";
 //import { firebase } from "../../config/firebaseconfig";
-
+import BouncyCheckbox from "react-native-bouncy-checkbox";
+import { Entypo } from '@expo/vector-icons';
 import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons"; //pq vamos usar ele? pq ele já é padrão do expo, e facilita bastante o nosso trabalho. E agora eu poderia utilizar os icones
-
+import { MaterialIcons } from '@expo/vector-icons';
 //import database from "../../config/firebaseconfig";
 import firebase from "../../config/firebaseconfig";
 
@@ -20,7 +21,9 @@ export default function Task ({ navigation, route }) {
     //esse useState vai ser um Array q vai guardar nossas tasks, e a gnt vai poder consumir dele no nosso flatlist
     const [task, setTask] = useState([]);
     const database = firebase.firestore();
-    
+    const [checkbox, setCheckBox] = useState(false);
+
+
     function logout () {
         //podemos olhar na documentação do firebase como fazer a função de logout. Em Autenticaçõ com senha -> https://firebase.google.com/docs/auth/web/password-auth?hl=pt&authuser=1   -> "Para desconectar um usuário, chame signOut:" vamo copiar aquela função e colar no nosso App para nos podermos fazer o logout
         firebase.auth().signOut().then(() => {
@@ -37,16 +40,16 @@ export default function Task ({ navigation, route }) {
         });
     }
 
-    function deleteTask(id) {
-        //database.collection("ToDos").doc(id).delete() antes de criar um usuario
-        database.collection(route.params.idUser).doc(id).delete().then(() => { 
-            alert("Deleted Successfully")
-         })
-         .catch(error => {
-            alert(error);
-         })
-        //DeleteTask ja estamos passando o route.params.idUser, quando clicamos, no caso, na estrela, nos recuperamos o ID devido por meio do .doc(id) e logo dps a gnt deleta .doc(id).delete() !!!!!!!!!! aqui em cima podemos criar nossa função de Logout
-    }
+    // function deleteTask(id) {
+    //     //database.collection("ToDos").doc(id).delete() antes de criar um usuario
+    //     database.collection(route.params.idUser).doc(id).delete().then(() => { 
+    //         alert("Deleted Successfully")
+    //      })
+    //      .catch(error => {
+    //         alert(error);
+    //      })
+    //     //DeleteTask ja estamos passando o route.params.idUser, quando clicamos, no caso, na estrela, nos recuperamos o ID devido por meio do .doc(id) e logo dps a gnt deleta .doc(id).delete() !!!!!!!!!! aqui em cima podemos criar nossa função de Logout
+    // }
 
     //então, criamos o useState, pra poder receber no useEffect as nossas Tasks quando elas carregarem lá no nosso banco, quando carregar nosso componente
     //para q ele carregue toda vez quando a gnt monta nosso componente o segundo parâmetro é []
@@ -66,30 +69,58 @@ export default function Task ({ navigation, route }) {
             query.forEach((doc) => {
                 list.push({...doc.data(), id: doc.id});
             })
+            // console.log(list);
             setTask(list);
         })    
     }, []);
     //nessa função do useEffect nos estamos pegando os dados do nosso banco, ta conectando la e pegando os dados, e dps setando dentro de task, nossa lista
+    
+    const createTwoButtonAlert = (id) =>
+    Alert.alert('Atenção!', 'Uma vez deletada a tarefa não há como recuperar. Deseja excluir mesmo assim?', [
+      {
+        text: 'Cancelar',
+        onPress: () => {return console.log('Cancel Pressed')},
+        style: 'cancel',
+      },
+      { text: 'Sim', onPress: () => database.collection(route.params.idUser).doc(id).delete().catch(error => {
+        alert(error);
+     }) },
+    ]);
+    //criando uma função para quando o item estiver marcado
+    let checkToDoItem = (item, isChecked) => {
+        console.log("chegou aqui");
+    };
 
     return (
         //vamos ter um estilo nessa view para podermos alinhar nosso ícone e nossa descrição
         <View style={styles.container}>
             <FlatList
                 //isso é pra n mostrar o scroll e n atrapalhar nosso estilo
-                showsVerticalScrollIndicator={false}
+                // style={{alignSelf: "stretch", backgroundColor: "green"}}
+                showsVerticalScrollIndicator={true}
                 data={task}
                 renderItem={( { item } ) => {
                     return (
                     //essa view vai ajudar a estilizar e deixar o icone do lado de cada tarefa -> icone do lado esquerdo + descrição lado direito
                     <View style={styles.Tasks}>
+                        {/* <BouncyCheckbox
+                            size={25}
+                            fillColor="red"
+                            unfillColor="#FFFFFF"
+                            text="Custom Checkbox"
+                            iconStyle={{ borderColor: "red" }}
+                            textStyle={{ fontFamily: "JosefinSans-Regular" }}
+                            onPress={(isClicked: boolean) => {}}
+                        /> */}
+                    <View style={{flexDirection: "row", height: 40, width: "95%", }}>
                         <TouchableOpacity style={styles.deleteTasks} onPress={()=> { 
-                            deleteTask(item.id)
+                            createTwoButtonAlert(item.id)
+                            
                             }} >
-                            <FontAwesome name="star" size={23} color="#FA5754">
+                            <FontAwesome name="trash" size={26} color="#838383">
                             </FontAwesome>
                         </TouchableOpacity>
-                        <View style={styles.descriptionTask}>
-                            <Text onPress={ () => {
+                        <TouchableOpacity style={styles.deleteTasks} onPress={ () => {
                                 //aqui ele vai navegar até details passando isso como parâmetro, e irei usar recuperar lá através do route, e dps fazer o route.params.id
                                 navigation.navigate("Details", { //e aqui dentro oq devemos passar, la em details dps onde a gnt vai salvar , precisamos ainda recuperar do documento, então a gnt vai ver la tb, vamo testar aqui dnv
                                     id: item.id,
@@ -97,30 +128,76 @@ export default function Task ({ navigation, route }) {
                                     idUser: route.params.idUser,
                                 })
                             } } >
+                            <FontAwesome style={{textAlign: "center"}} name="pencil" size={26} color="#FA5754"></FontAwesome>
+                        </TouchableOpacity>
+                        <View style={{justifyContent: "center", flex: 1, marginHorizontal: 15}}>
+                            <BouncyCheckbox
+                                isChecked={item.status}
+                                style={{}}
+                                size={25}
+                                fillColor="#0D9F6F"
+                                unfillColor="#FFFFFF"
+                                text={item.description}
+                                iconStyle={{ borderColor: "red" }}
+                                innerIconStyle={{ borderWidth: 2 }}
+                                //textStyle={{ fontFamily: "JosefinSans-Regular" }}
+                                onPress={(isChecked) => { checkToDoItem(item, isChecked) }}
+                                />
+                        </View>
+                        {/* <View style={styles.descriptionTask}>
+                            <Text >
                                 {item.description}
                             </Text>
-                        </View>
+                        </View> */}
+                    </View>
                     </View>
                     );
-                }} 
+                }}
+            keyExtractor={item => item.id} 
+            ListHeaderComponent={() => {
+                return ( 
+                <View style={{flexDirection: "row", justifyContent: "space-between", paddingVertical: 5,}}>
+                    
+                    <TouchableOpacity style={styles.buttonNewTask} onPress={()=> navigation.navigate("New Task", { idUser: route.params.idUser })} >
+                        {/* <Text style={styles.iconButton}>+</Text> */}
+                        {/* <FontAwesome style={{textAlign: "center"}} name="plus" size={23} color="#FA5754"></FontAwesome> */}
+                        <Entypo style={{textAlign: "center"}} name="add-to-list" size={23} color="#FA5754" />
+                        {/*  https://icons.expo.fyi/        https://icons.expo.fyi/Entypo/add-to-list */}
+                    </TouchableOpacity>
+            
+                <View style={{marginRight: "auto", marginLeft: "auto", marginTop: 0,}}>
+                </View>
+                    <TouchableOpacity style={styles.buttonLogout} onPress={() => logout() }>
+                        {/* //quando clicar nesse botão ele vai chamar a função de logout, nos precisamos ter um ícone aqui. Pra isso, precisamos colocar ele dentro de um Text */}
+                        <Text style={styles.iconButtonLogout}>
+                            {/* <MaterialCommunityIcons></MaterialCommunityIcons>  <<< poderiamos chamar assim! mas vamos chamar da outra forma, junto com as propriedades que a gnt quer. name vamo chamar o location-exit q é um icone de sair mesmo */}
+                            <MaterialCommunityIcons name="location-exit" size={32} color="#838383" />
+                        </Text>
+                    </TouchableOpacity>
+                
+                </View>
+
+                );
+            }}
+        ListFooterComponent={() => {
+            return <View style={{marginBottom: 25, marginRight: "auto", marginLeft: "auto", marginTop: 10}}>
+                    <TouchableOpacity style={styles.buttonPomo} onPress={()=> navigation.navigate("PomoTimer", { idUser: route.params.idUser })} >
+                        {/* <Text style={styles.iconButton}>T</Text> */}
+                        {/* <Image source={PomoIcon} style={{width: 180, height: 180}} /> */}
+                        <MaterialIcons name="timer" size={42} color="#FA5754" />
+                        {/* <FontAwesome name="plus" size={23} color="#FA5754"></FontAwesome> */}
+                    </TouchableOpacity>
+                    </View>
+        }}
             />
             {/* embaixo da minha lista a gnt vai querer ter um botão, dentro de Task, q é um +, então iremos clicar nele e ele vai redirecionar para a tela de novas tasks "New Task" */}
             {/* com o navigation adicionado lá em cima, pois eu quero ser redirecionado para a pagina de criar uma nova tarefa ao clicar no + */}
             {/* erro em 1h 43:22 */}
-            <TouchableOpacity style={styles.buttonNewTask} onPress={()=> navigation.navigate("New Task", { idUser: route.params.idUser })} >
+            {/* <TouchableOpacity style={styles.buttonNewTask} onPress={()=> navigation.navigate("New Task", { idUser: route.params.idUser })} >
                 <Text style={styles.iconButton}>+</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.buttonPomoTimer} onPress={()=> navigation.navigate("PomoTimer", { idUser: route.params.idUser })} >
-                {/* <Text style={styles.iconButton}>T</Text> */}
-                <Image source={PomoIcon} style={{width: 150, height: 150, marginLeft: 0}} />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.buttonLogout} onPress={() => logout() }>
-                {/* //quando clicar nesse botão ele vai chamar a função de logout, nos precisamos ter um ícone aqui. Pra isso, precisamos colocar ele dentro de um Text */}
-                <Text style={styles.iconButtonLogout}>
-                    {/* <MaterialCommunityIcons></MaterialCommunityIcons>  <<< poderiamos chamar assim! mas vamos chamar da outra forma, junto com as propriedades que a gnt quer. name vamo chamar o location-exit q é um icone de sair mesmo */}
-                    <MaterialCommunityIcons name="location-exit" size={23} color="#FA5754" />
-                </Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
+            
+            
             {/* <TouchableOpacity style={styles.buttonPomodoro} onPress={() => navigation.navigate("PomoTimer")} >
                 <FontAwesome name="hourglass-end" size={63} color="#FA5754"></FontAwesome>           
             </TouchableOpacity> */}

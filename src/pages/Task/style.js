@@ -7,14 +7,18 @@ const styles = StyleSheet.create({
         paddingTop: 20,
     },
     Tasks: {
-        width: "100%",
+        width: "95%",
         flexDirection: "row",
-        justifyContent: "space-between",
+        //justifyContent: "center",
+        marginRight: "auto",
+        marginLeft: "auto",
         marginTop: 5,
+        //backgroundColor: "black"
     },
     deleteTasks: {
         justifyContent: "center",
         paddingLeft: 15,
+        //backgroundColor: "red",
     },
     descriptionTask: {
         width: "75%",
@@ -28,31 +32,51 @@ const styles = StyleSheet.create({
         color: "#282b2db5",
     },
     buttonNewTask: {
-        position: "absolute",
-        width: 60,
-        height: 60,
-        bottom: 30,
-        left: 20,
-        backgroundColor: "#FA5754",
-        borderRadius: 50, 
+        //position: "absolute",
+        // width: 60,
+        // height: 60,
+        // bottom: 30,
+        // left: 20,
+        width: 50,
+        height: 50,
+        padding: 10,
+        //backgroundColor: "#FA5754",
+        borderColor: "#FA5754",
+        marginLeft: 15,
+        borderWidth: 1,
+        borderRadius: 10,
+        //marginTop: 5, 
         justifyContent: "center", 
+        // alignItems: "center",
+    },
+    buttonPomo:{
+        borderColor: "#FA5754",
+        borderWidth: 1,
+        width: 70,
+        height: 70,
+        justifyContent: "center",
         alignItems: "center",
+        borderRadius: 80
     },
     iconButton: {
-        color: "#ffffff",
-        fontSize: 25,
-        fontWeight: "bold",
+        color: "#838383",
+        fontSize: 30,
+        textAlign: "center",
+        lineHeight: 30,
+        justifyContent: "center"
+        //fontWeight: "bold",
     },
     buttonLogout: {
-        position: "absolute",
-        width: 60,
-        height: 60,
-        bottom: 30,
+        //position: "absolute",
+        width: 50,
+        height: 50, 
+        //bottom: 30,
         right: 20,  //como queremos colcar do outro lado, vamos só mudar o left para right!
         //backgroundColor: "#FA5754", //n vamos ter um backgroundcollor pq n queremos q tenha a cor, e sim só o ícone
         //borderRadius: 50, tb n vai precisar do borderRadius 
         justifyContent: "center",  //a gnt quer q ele seja alinhado ao centro
         alignItems: "center",
+        //backgroundColor: "blue"
     },
     iconButtonLogout: {
         color: "#FFFFFF",
@@ -64,13 +88,15 @@ const styles = StyleSheet.create({
         //Em Fim, conseguimos implementar um App configurado com o FireBase desde o CRUD completo, toda parte de login, olhando a documentação, implementando parte a parte, estilizando o nosso app, tendo a página de cadastrar um novo usuário, fazendo logout,  fizemos uma aplicação completa 
     },
     buttonPomoTimer:{
-        position: "absolute",
-        width: 60,
-        height: 90,
-        bottom: 30,
-        left: 165,
+        //position: "absolute",
+        width: 100,
+        height: 100,
+        //backgroundColor: "black",
+        //height: 90,
+        //bottom: 30,
+        //left: 165,
         //backgroundColor: "#FA5754",
-        borderRadius: 50, 
+        //borderRadius: 50, 
         justifyContent: "center", 
         alignItems: "center",
     }

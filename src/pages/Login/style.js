@@ -9,6 +9,23 @@ const styles = StyleSheet.create({
         //uma coisa q iremos fazer tb é adicionar uma margem pra cada plataforma, então se for IOS n precisa fazer nenhuma margem, mas se for Android a gnt poderia dar um padding 60 pra ele poder ficar um pouco melhor
         paddingTop: Platform.OS === "ios" ? 0 : 50,
     },
+    containerLogo: {
+        flex: 1,
+        //marginTop: 80,
+        justifyContent: "center", // para alinhar verticalmente no centro
+        alignItems: "center"
+        // não precisa botar align items pois ja foi botado no container
+    },
+    containerInputs: {
+        //vou falar q ele vai ser flex 1 tb, pq ambos vão se dividir no mesmo tamanho da tela 
+        alignItems: "center", //alinha tudo no centro q tem dentro desse container
+        justifyContent: "center",
+        width: "90%",
+        //backgroundColor: "red",
+        // marginBottom: 85,
+        // marginTop: 75,
+        //marginVertical: 70
+    },
     title: {
         fontSize: 48,
         //lineHeight: 52, //Se liga q sou eu testando essa propriedade !!!!!!!!!!!!!
@@ -17,28 +34,37 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
     },
     input: {
-        width: 300,
-        marginTop: 10,
-        height: 50,
-        borderBottomWidth: 1,
-        borderBottomColor: "#FA5754",
+        backgroundColor: "#FFF",
+        width: "90%",
+        //marginTop: 10,
+        marginBottom: 11,
+        height: 43,  //50
+        // borderBottomWidth: 1,
+        // borderBottomColor: "#FA5754",
+        borderWidth: 1,
+        borderColor: "#838383",
         marginLeft: "auto",
         marginRight: "auto", //na web vemos mt usar o margin: auto. Porém aqui no RN n da, a gnt n tem margin auto automaticamente para os dois lados, a gnt precisa definir marginLeft e o marginRight para poder funcionar
-        color: "#4d5156", //cor do nosso texto no input, ver dps se é isso msm. ======= #474747 -> Texto(mais escuro)         #838383 -> Texto 2 (mais claro)
+        color: "#474747", //cor do nosso texto no input, ver dps se é isso msm. ======= #474747 -> Texto(mais escuro)         #838383 -> Texto 2 (mais claro)      // sujeito programador usa #222
+        fontSize: 17, 
+        borderRadius: 10,
+        padding: 10,
     },
     buttonLogin: {
-        width: 200,
-        height: 50,
+        width: "80%",
+        height: 45,
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: "#FA5754",
-        borderRadius: 50,
+        borderRadius: 10,
         marginTop: 30,
+        //color: "#35AAFF"
     },
     textButtonLogin: {
         color: "#FFFFFF",
+        fontSize: 16,
         // fontSize: 16,
-        // fontWeight: "bold"
+        fontWeight: "bold"
     },
     contentAlert: {
         //esse é para ser definido quando tiver um erro
@@ -54,11 +80,12 @@ const styles = StyleSheet.create({
     },
     registration: {
         marginTop: 20,
-        color: "#838383", //#838383   poderia ser tb #4d5156   
+        //color: "#838383", //#838383   poderia ser tb #4d5156   
     },
     linkSubscribe: {
-        color: "#1877f2", //como é um link, é interessante usar cores mais próximas do Azul, então isso é uma técnica na produção de software, pois o nosso cérebro tem uma tendência a clicar em coisas azul. Aqui iremos usar um azul muito usado em diversas aplicações
+        color: "#838383", //como é um link, é interessante usar cores mais próximas do Azul (como exemplo a #1877f2 ou #279AF1), então isso é uma técnica na produção de software, pois o nosso cérebro tem uma tendência a clicar em coisas azul. Aqui iremos usar um azul muito usado em diversas aplicações
         fontSize: 16,
+        //efontWeight: "500"
     }
 });
 
