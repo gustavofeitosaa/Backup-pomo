@@ -86,9 +86,14 @@ export default function Task ({ navigation, route }) {
         alert(error);
      }) },
     ]);
+
     //criando uma função para quando o item estiver marcado
     let checkToDoItem = (item, isChecked) => {
-        console.log("chegou aqui");
+        //console.log("chegou aqui");
+        //const toDoRef = doc(db, '');
+        database.collection(route.params.idUser).doc(item.id).update({
+            status: isChecked,
+        })
     };
 
     return (
