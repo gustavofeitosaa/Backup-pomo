@@ -54,9 +54,12 @@ const styles = StyleSheet.create({
 		//marginBottom: 0,
 		//shadowColor: "#00000083"
 		//backgroundColor: "black",
+		//borderRadius: 50,
+		// borderWidth: 2,
+		// borderColor: "red",
 		width: 180,
 		//paddingHorizontal: 30,
 		//justifyContent: "space-around"
-		marginLeft: 37,
+		marginLeft: 40,
 	}
 })
