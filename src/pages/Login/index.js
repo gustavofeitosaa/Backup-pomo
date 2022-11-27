@@ -38,7 +38,7 @@ export default function Login ({ navigation }) {
             let user = userCredential.user;
             // ...
             //se tiver sucesso então, vamos fazer um navigation.navigate e nos vamos encaminhar para Task e dps vamos passar uma propriedade como parametro q a gnt vai poder recuperar ({ idUser: user.uid }) uma propriedade q vem/retorna quando o usuario faz o login ele imprime isso pra gente, se eu n quisesse fazer o navigation eu posso fazer um console.log(user) por exemplo, e poderei ver oq ta sendo retornado aí 
-            navigation.navigate("Task", { idUser: user.uid }) //temos q pegar esse parametro { idUser: user.uid } e passar para dentro do nosso Task quando a gnt for adicionar uma nova task (no onPress do botão de add em Task)
+            navigation.navigate("Tarefas", { idUser: user.uid }) //temos q pegar esse parametro { idUser: user.uid } e passar para dentro do nosso Task quando a gnt for adicionar uma nova task (no onPress do botão de add em Task)
             //console.log(user)
         })
         .catch((error) => {
@@ -88,7 +88,7 @@ export default function Login ({ navigation }) {
           // https://firebase.google.com/docs/reference/js/firebase.User
           //se tiver algum usuario conectado, vamo fazer um navigation.nabvigate pra dentro de Task e vamo passar como parametro idUser
           //var uid = user.uid;
-          navigation.navigate("Task", { idUser: user.uid });
+          navigation.navigate("Tarefas", { idUser: user.uid });
           // ...
         } 
         //Tinha um Else na função original, mas n vamos usa-lo else {

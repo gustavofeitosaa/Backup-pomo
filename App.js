@@ -35,25 +35,25 @@ export default function App() {
         />
         {/* ter uma seta para voltar para login n faz nenhum sentido, precisamos passar um parâmetro para dentro de option q vai permitir tirar aquela setinha, e ai gnt n tem mais essa informação ali, e fique anulada, essa seta perde a função! nome da propriedade-> HeaderLeft */}
         <Stack.Screen
-          name='Task'
+          name='Tarefas'
           component={Task}
           options={{headerTintColor: "#FA5754", headerLeft: null }} //headerStyle: {backgroundColor : "papayawhip"}}}
 
         />
         <Stack.Screen
-          name='New Task'
+          name='Nova Tarefa'
           component={NewTask}
           options={{headerTintColor: "#FA5754"}}
 
         />
         <Stack.Screen
-          name='Details'
+          name='Detalhes'
           component={Details}
           options={{headerTintColor: "#FA5754"}}
 
         />
         <Stack.Screen
-          name='PomoTimer'
+          name='Pomodoro'
           component={PomoTimer}
           options={{headerTintColor: "#FA5754"}}
         />

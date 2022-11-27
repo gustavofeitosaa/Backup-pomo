@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
 	container: {
 		// flex: 1,
 		width: "100%",
-		
+		bottom: 5,
 		// marginTop: "5%",
 	    // marginBottom: "1%",
 	    // marginLeft: "7%",
@@ -38,20 +38,25 @@ const styles = StyleSheet.create({
 	    //borderRadius: 80,
 	    //borderWidth: 5,
 		alignItems: 'center',
-		justifyContent: "center",
+		//justifyContent: "center",
 		//backgroundColor: "#EBF8B8",
 	},
 	textStyle: {
-		flex: 1,
-		width: "100%",
-		textAlign: "center",
+		// flex: 1,
+		// width: "100%",
+		//textAlign: "center",
 		color: "white",
 	    fontSize: 50,
 	    fontWeight: "400",
 		letterSpacing: 2,
 		//borderWidth: 5,
 		//borderRadius: 28,
-		marginBottom: 0,
+		//marginBottom: 0,
 		//shadowColor: "#00000083"
+		//backgroundColor: "black",
+		width: 180,
+		//paddingHorizontal: 30,
+		//justifyContent: "space-around"
+		marginLeft: 37,
 	}
 })

@@ -11,13 +11,12 @@ class PomodoroTimer extends React.Component {
 			workTime: 25,
 			breakTime: 5,
 			intervalType : "Working",
-			points: 0,
 		}
 	}
 
 	// handles completion of timer
 	handleTimerCompleted = () => {
-		let contador = this.state.points + 1;
+		//let contador = this.state.points + 1;
 
 		if(this.state.intervalType === "Working")
 		{
@@ -29,9 +28,9 @@ class PomodoroTimer extends React.Component {
 		{
 			this.setState({
 				intervalType: "Working",
-				points: contador,
+				//points: contador,
 			})
-			console.log(this.state.points);	
+			//console.log(this.state.points);	
 		}
 	}
 
@@ -45,7 +44,7 @@ class PomodoroTimer extends React.Component {
 			})
 		}
 		else{
-			alert("Time invalid. Setting value to default. Please enter valid time")
+			alert("O tempo informado é inválido. Definindo de volta o valor padrão. Por favor insira um tempo válido.")
 			this.setState({
 				workTime: 25
 			})
@@ -62,7 +61,7 @@ class PomodoroTimer extends React.Component {
             })
         }
         else{
-            alert("Time invalid. Setting value to default. Please enter valid time")
+            alert("O tempo informado é inválido. Definindo de volta o valor padrão. Por favor insira um tempo válido.")
 			this.setState({
 				workTime: 25
 			})
@@ -79,7 +78,7 @@ class PomodoroTimer extends React.Component {
             })
         }
         else{
-            alert("Time invalid. Setting value to default. Please enter valid time")
+            alert("O tempo informado é inválido. Definindo de volta o valor padrão. Por favor insira um tempo válido.")
 			this.setState({
 				breakTime: 5
 			})
@@ -91,7 +90,7 @@ class PomodoroTimer extends React.Component {
 
         if(this.state.workTime >= 99)
         {
-            alert("Time invalid. Setting value to default. Please enter valid time")
+            alert("O tempo informado é inválido. Definindo de volta o valor padrão. Por favor insira um tempo válido.")
 			this.setState({
 				workTime: 25
 			})
@@ -109,7 +108,7 @@ class PomodoroTimer extends React.Component {
 
         if(this.state.breakTime >= 99)
         {
-            alert("Time invalid. Setting value to default. Please enter valid time")
+            alert("O tempo informado é inválido. Definindo de volta o valor padrão. Por favor insira um tempo válido.")
 			this.setState({
 				breakTime: 25
 			})
@@ -132,7 +131,7 @@ class PomodoroTimer extends React.Component {
 		}
 		else
 		{
-			alert("Time invalid. Setting value to default. Please enter valid time")
+			alert("O tempo informado é inválido. Definindo de volta o valor padrão. Por favor insira um tempo válido.")
 			this.setState({
 				breakTime: 5
 			})

@@ -1,5 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { Entypo } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons'; 
+import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
 
 class TimerButtons extends React.Component {
 	state = {};
@@ -11,10 +14,15 @@ class TimerButtons extends React.Component {
 			return (
 				<View style={styles.container}>
 					<TouchableOpacity style={styles.buttonStyle} onPress={this.props.pause}>
-						<Text style={styles.buttonText}>Pause</Text>
+						{/* <Text style={styles.buttonText}>Pause</Text> */}
+						{/* <Text><FontAwesome5 name="pause"  size={44} color="#FA5754" style={{}}/></Text> */}
+						<FontAwesome name="pause" size={44} color="#6C0E23">
+                            </FontAwesome>
 					</TouchableOpacity>
 					<TouchableOpacity style={styles.buttonStyle} onPress={this.props.reset}>
-						<Text style={styles.buttonText}>Reset</Text>
+						{/* <Text style={styles.buttonText}>Reset</Text> */}
+						<FontAwesome name="repeat" size={44} color="#6C0E23">
+                            </FontAwesome>
 					</TouchableOpacity>
 				</View>
 			)
@@ -24,7 +32,8 @@ class TimerButtons extends React.Component {
 			return(
 				<View  style={[styles.container, {marginRight: "auto", marginLeft: "auto"}]}>
 					<TouchableOpacity style={styles.buttonStyle} onPress={this.props.play}>
-						<Text style={styles.buttonText}>Play</Text>
+						{/* <Text style={styles.buttonText}>Play</Text> */}
+						<Text>  <FontAwesome name="play" size={44} color="#6C0E23"></FontAwesome></Text>
 					</TouchableOpacity>
 				</View>
 			)
@@ -45,10 +54,13 @@ const styles=StyleSheet.create({
 	},
 	buttonStyle:{
 		alignItems: "center",
-		backgroundColor: "#FA5754",
-	    padding: 30,
+		backgroundColor: "#FA5754", //FCA311
+	    padding: 15,
+		paddingHorizontal: 30,
 	    flexDirection: "row" ,
-	    borderRadius: 80,
+	    borderRadius: 15,
+		textAlign: "center"
+		
 	}, 
 	 buttonText: {
 	    color: "white",

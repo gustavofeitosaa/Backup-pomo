@@ -26,7 +26,7 @@ export default function Details ({navigation, route}) {
             description: descriptionEdit,
         })
         //dps de fazer a atualização no nosso DataBase, a gnt passa o 
-        navigation.navigate("Task", { idUser:route.params.idUser });
+        navigation.navigate("Tarefas", { idUser:route.params.idUser });
     }
 
     return (

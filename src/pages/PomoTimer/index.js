@@ -8,9 +8,9 @@ export default class App extends React.Component {
   render() {
     return (
       <ScrollView style={styles.container}>
-        <ImageBackground source={backgroundTelaPomodoro} resizeMode="stretch=">
+        {/* <ImageBackground source={backgroundTelaPomodoro} resizeMode="stretch="> */}
           <PomodoroTimer />
-        </ImageBackground>
+        {/* </ImageBackground> */}
       </ScrollView>
     );
   }

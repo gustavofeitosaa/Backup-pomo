@@ -4,48 +4,59 @@ import { Platform, StyleSheet, Text, View } from 'react-native';
 class TimerHeader extends React.Component {
 
 	// handles the display of timer header
-	handleDisplay = () => {
+
+
+	timerHeader = () => {
 		if(this.props.intervalType === "Working")
 		{
 			if(this.props.running === true) {
-				return "Keep working hard!"
+				return "Mantenha-se concentrado!"
 			}
 			else {
-				return "Time to work!"
+				return "Hora de focar!"
 			}	
 		}
 		else {
 			if(this.props.running === true) {
-				return "It's break time! Enjoy"
+				return "É hora do descanso! Aproveite"
 			}
 			else {
-				return "Relax :)"
+				return "Relaxe :)"
 			}	
 		}
-
 	}
+
+	
 	render() {
 	
-		let texttoshow = this.handleDisplay()
+		let texttoshow = this.timerHeader()
 		return(
-			<Text style={styles.textStyle}>{texttoshow}</Text>
+			<View style={{height: 80}}>
+				<Text style={styles.textStyle}>{texttoshow}</Text>
+			</View>
 		)				
 	}
 }
 
 const styles = StyleSheet.create({
   textStyle: {
+	position: "absolute",
+	textAlign: "center",
+	right: 0,
+	left: 0,
 	color: "#474747",
+	//backgroundColor: "blue",
     fontSize: 25,
     fontWeight: "500",
     letterSpacing: 1.5,
     //fontFamily: Platform.OS == "android" ? "notoserif" : "Symbol",
-    marginTop: 10,
+    //marginTop: 10,
     padding: 20,
 	//backgroundColor: "black",
 	//textAlign: "center",
 	marginLeft: "auto",
 	marginRight: "auto"
+
   }
 });
 

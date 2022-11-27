@@ -4,7 +4,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#fff",
-        paddingTop: 20,
+        paddingTop: 5,
     },
     Tasks: {
         width: "95%",
@@ -50,13 +50,14 @@ const styles = StyleSheet.create({
         // alignItems: "center",
     },
     buttonPomo:{
-        borderColor: "#FA5754",
-        borderWidth: 1,
-        width: 70,
-        height: 70,
-        justifyContent: "center",
-        alignItems: "center",
-        borderRadius: 80
+        // borderColor: "#FA5754",
+        // borderWidth: 1,
+        // //width: 70,
+        // //height: 70,
+        
+        // justifyContent: "center",
+        // alignItems: "center",
+        // borderRadius: 80
     },
     iconButton: {
         color: "#838383",
