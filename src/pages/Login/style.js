@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     linkSubscribe: {
         color: "#838383", //como é um link, é interessante usar cores mais próximas do Azul (como exemplo a #1877f2 ou #279AF1), então isso é uma técnica na produção de software, pois o nosso cérebro tem uma tendência a clicar em coisas azul. Aqui iremos usar um azul muito usado em diversas aplicações
         fontSize: 16,
-        //efontWeight: "500"
+        fontWeight: "500"
     }
 });
 

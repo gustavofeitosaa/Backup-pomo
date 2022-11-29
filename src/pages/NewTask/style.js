@@ -12,33 +12,44 @@ const styles = StyleSheet.create({
         // marginLeft: "auto", //qnd coloca margin tanto pra direita quanto para esquerda, usamos o margin de auto, no react native é diferente do da web, aquui é necessario setar "auto" para marginLeft e marginRight
         // marginRight: "auto",
         fontSize: 16,
-        color: "#FA5754"
+        fontWeight: "500",
+        color: "#838383"
         //backgroundColor: "blue"
     },
     input: {
         width: "90%",
-        marginTop: 10,
+        marginTop: 20,
         padding: 10,
-        height: 50, 
-        borderBottomWidth: 1,
-        borderBottomColor: "#FA5754",
+        height: 45,
+        borderColor: "#838383",
+        borderRadius: 10,
+        backgroundColor: "#FFFFFF",
+        //borderBottomWidth: 1,
+        borderWidth: 1,
+        //borderBottomColor: "#FA5754",
         //margin: "auto" n tem nenhum efeito para que possa ter esse efeito igual tem na web, faremos:
         marginLeft: "auto",
         marginRight: "auto",// pra deixar alinhadinho ao centro
+        color: "#434343"
     },
     buttonNewTask: {
-        position: "absolute",
-        width: 60,
-        height: 60,
-        bottom: 30,
-        left: 20,
-        backgroundColor: "#FA5754",
-        borderRadius: 50, 
+        //position: "absolute",
+        width: "40%",
+        height: 40,
+        marginTop: 30,
+        //bottom: 30,
+        //left: 20,
+        backgroundColor: "#0D9F6F",
+        borderWidth: 1,
+        borderColor: "transparent",
+        borderRadius: 10, 
         justifyContent: "center", 
         alignItems: "center",
+        marginRight: "auto",
+        marginLeft: "auto"
     },
     iconButton: {
-        color: "#ffffff",
+        color: "white",
         fontSize: 16,
         fontWeight: "bold",
     }

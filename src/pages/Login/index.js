@@ -188,6 +188,7 @@ export default function Login ({ navigation }) {
             <TextInput
                 style={styles.input} 
                 secureTextEntry={true}
+                autoCorrect={false}
                 placeholder='digite sua senha'
                 type='text'
                 onChangeText={(text) => setPassword(text)}
@@ -208,7 +209,7 @@ export default function Login ({ navigation }) {
                 size={24}
                 color='#bdbdbd'
                 />
-            <Text style={styles.warningAlert}>invalid e-mail or password</Text>
+            <Text style={styles.warningAlert}>e-mail ou senha inválidos</Text>
         </View>
         :
         <View/>  

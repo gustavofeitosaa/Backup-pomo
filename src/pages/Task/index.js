@@ -1,6 +1,6 @@
 import React, { useState, useEffect }  from "react";
 import { SafeAreaView, View, Text, TouchableOpacity, FlatList, Image, Alert, Button } from "react-native";
-import PomoIcon from "../../../assets/icon_tela_pomo.png"
+//import PomoIcon from "../../../assets/icon_tela_pomo.png"
 //import database from "../../config/firebaseconfig";
 // import { database } from "../../config/firebaseconfig";
 //import { firebase } from "../../config/firebaseconfig";
@@ -24,13 +24,6 @@ export default function Task ({ navigation, route }) {
     const [checkbox, setCheckBox] = useState(false);
     const user = firebase.auth().currentUser;
 
-    const ExibeEmailDoUsuario = () => {
-        if(user != null) {
-            const email = user.email
-            
-            return email;
-        }
-    }
 
     function logout () {
         //podemos olhar na documentação do firebase como fazer a função de logout. Em Autenticaçõ com senha -> https://firebase.google.com/docs/auth/web/password-auth?hl=pt&authuser=1   -> "Para desconectar um usuário, chame signOut:" vamo copiar aquela função e colar no nosso App para nos podermos fazer o logout
@@ -72,7 +65,7 @@ export default function Task ({ navigation, route }) {
     useEffect(() => {
         //dps de collection eu coloquei .orderBy('createdAt','desc'). e não foi
         //database.collection("ToDos").onSnapshot((query) => {
-        database.collection(route.params.idUser).onSnapshot((query) => {   //tem q ver como dar um orderBy para ordenar as tarefas direito
+        database.collection(route.params.idUser).orderBy('createdAt', 'asc').onSnapshot((query) => {   //tem q ver como dar um orderBy para ordenar as tarefas direito
             const list = [];  
             query.forEach((doc) => {
                 list.push({...doc.data(), id: doc.id});
@@ -170,23 +163,14 @@ export default function Task ({ navigation, route }) {
             keyExtractor={item => item.id} 
             ListHeaderComponent={() => {
                 return ( <View>
-                        
+{/*                         
                         <View style={{flexDirection: "row", width: "90%", justifyContent: "space-between", marginRight: "auto", marginLeft: "auto", marginTop: 10}}>
                             <Text style={{marginLeft: 0, fontWeight: "bold", fontSize: 22, lineHeight: 32, color: "#838383", 
                             marginBottom: 5,}}>Bem-vindo,</Text>
-                            <TouchableOpacity style={styles.buttonLogouts} onPress={() => logout() }>
-                                {/* //quando clicar nesse botão ele vai chamar a função de logout, nos precisamos ter um ícone aqui. Pra isso, precisamos colocar ele dentro de um Text */}
-                                <Text style={styles.iconButtonLogout}>
-                                    {/* <MaterialCommunityIcons></MaterialCommunityIcons>  <<< poderiamos chamar assim! mas vamos chamar da outra forma, junto com as propriedades que a gnt quer. name vamo chamar o location-exit q é um icone de sair mesmo */}
-                                    <MaterialCommunityIcons name="location-exit" size={32} color="#838383" />
-                                </Text>
-                            </TouchableOpacity>
                          </View>
-                            
-                        <Text style={{marginRight: "auto", marginLeft: "auto", fontSize: 22, lineHeight: 32, color: "#434343", 
-                         marginBottom: 5, color: "#FA5754", borderWidth: 1, borderColor: "#FA5754", borderRadius: 10, padding: 7,}}><FontAwesome name="user" size={26} color="#FA5754"/>  <ExibeEmailDoUsuario/></Text>
+                             */}
 
-                <View style={{flexDirection: "row", justifyContent: "space-between", paddingVertical: 5,}}>
+                <View style={{flexDirection: "row", paddingVertical: 5, alignItems: "center", width: "92%", marginLeft: "auto", marginRight: "auto", justifyContent: "space-between"}}>
                     
                     
                     <TouchableOpacity style={styles.buttonNewTask} onPress={()=> navigation.navigate("Nova Tarefa", { idUser: route.params.idUser })} >
@@ -194,6 +178,14 @@ export default function Task ({ navigation, route }) {
                         {/* <FontAwesome style={{textAlign: "center"}} name="plus" size={23} color="#FA5754"></FontAwesome> */}
                         <Entypo style={{textAlign: "center"}} name="add-to-list" size={23} color="#FA5754" />
                         {/*  https://icons.expo.fyi/        https://icons.expo.fyi/Entypo/add-to-list */}
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.buttonLogouts} onPress={() => logout() }>
+                        {/* //quando clicar nesse botão ele vai chamar a função de logout, nos precisamos ter um ícone aqui. Pra isso, precisamos colocar ele dentro de um Text */}
+                        <Text style={styles.iconButtonLogout}>
+                            {/* <MaterialCommunityIcons></MaterialCommunityIcons>  <<< poderiamos chamar assim! mas vamos chamar da outra forma, junto com as propriedades que a gnt quer. name vamo chamar o location-exit q é um icone de sair mesmo */}
+                            <MaterialCommunityIcons name="location-exit" size={32} color="#838383" />
+                        </Text>
                     </TouchableOpacity>
                 </View>
             </View>

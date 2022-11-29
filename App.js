@@ -10,8 +10,56 @@ import Login from './src/pages/Login';
 import NewUser from './src/pages/NewUser';
 import PomoTimer from './src/pages/PomoTimer';
 
+import * as SplashScreen from 'expo-splash-screen';
+import { Asset } from 'expo-asset';
+import React, { useState, useEffect } from "react";
+
+function cacheImages(images) {
+  return images.map(image => {
+    if (typeof image === 'string') {
+      return Image.prefetch(image);
+    } else {
+      return Asset.fromModule(image).downloadAsync();
+    }
+  });
+}
+
 
 export default function App() {
+  const [appIsReady, setAppIsReady] = useState(false);
+
+  useEffect(() => {
+    async function loadResourcesAndDataAsync() {
+      try {
+        SplashScreen.preventAutoHideAsync();
+
+        const imageAssets = cacheImages([
+          require('./assets/background.png'),
+          require('./assets/background_new_user.png'),
+          require('./assets/background_add_edit.png'),
+          require('./assets/background_pomodoro.png'),
+        ]);
+
+
+        await Promise.all([...imageAssets]);
+      } catch (e) {
+        // You might want to provide this error information to an error reporting service
+        console.warn(e);
+      } finally {
+        setAppIsReady(true);
+        SplashScreen.hideAsync();
+      }
+    }
+
+      loadResourcesAndDataAsync();
+    }, []);
+
+    if (!appIsReady) {
+      return null;
+    }
+
+
+
   return (
     //agr vamo criar todas a parte das paginas q vamos navegar, q é o que vai estar dentro de pages
     //primeiro a gnt tem q definir qual vai ser a página padrão, então, é uma página que carrega assim q carrega o nosso app

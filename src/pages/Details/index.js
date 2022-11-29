@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, ImageBackground } from "react-native";
 
 import firebase from "../../config/firebaseconfig";
 import styles from "./style";
@@ -30,14 +30,14 @@ export default function Details ({navigation, route}) {
     }
 
     return (
-        <View style={styles.container}>
+        <ImageBackground source={require("../../../assets/background_add_edit.png")} style={styles.container}>
             <Text style={styles.label}></Text>
             <TextInput style={styles.input} placeholder="Ex: estudar javascript" onChangeText={setDescriptionEdit} value={descriptionEdit}/>
-            <TouchableOpacity style={styles.buttonNewTask} onPress={() => { 
+            <TouchableOpacity style={styles.buttonDetails} onPress={() => { 
                 editTask(descriptionEdit, idTask);
                 }}>
-                <Text style={styles.iconButton}>Save</Text>
+                <Text style={styles.iconButton}>Editar</Text>
             </TouchableOpacity>
-        </View>
+        </ImageBackground>
     )
 }

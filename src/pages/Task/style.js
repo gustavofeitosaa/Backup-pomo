@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
         marginRight: "auto",
         marginLeft: "auto",
         marginTop: 5,
-        //backgroundColor: "black"
+        
     },
     deleteTasks: {
         justifyContent: "center",
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
         padding: 10,
         //backgroundColor: "#FA5754",
         borderColor: "#FA5754",
-        marginLeft: 15,
+        //marginLeft: 15,
         borderWidth: 1,
         borderRadius: 10,
         //marginTop: 5, 

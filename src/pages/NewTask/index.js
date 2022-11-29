@@ -1,5 +1,5 @@
 import react, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, ImageBackground } from "react-native";
 
 import firebase from "../../config/firebaseconfig"
 import styles from "./style";
@@ -12,9 +12,11 @@ export default function NewTask ({ navigation, route }) {
 
     function addTask() {
         //database.collection("ToDos").add({
+        const timestamp = firebase.firestore.FieldValue.serverTimestamp();
         database.collection(route.params.idUser).add({
             description: description,
-            status: false
+            status: false,
+            createdAt: timestamp,
         })
         navigation.navigate("Tarefas", { idUser:route.params.idUser })
     }
@@ -23,14 +25,34 @@ export default function NewTask ({ navigation, route }) {
     //no textInput nos temos q adicionar um valor (value) e para cada vez q a gnt digita o nosso value ele é nosso propio description.
     //então para cada vez que eu digito, o meu state ele é atualizado, e ele recebe o valor description. Ele seta o valor q ta dando no onChangeTask e manda para o value
     return (
-        <View style={styles.container}>
+        <ImageBackground source={require("../../../assets/background_add_edit.png")} style={styles.container}>
             <Text style={styles.label}>Descrição</Text>
             <TextInput style={styles.input} placeholder="Ex: estudar javascript" onChangeText={setDescription} value={description}/>
-            <TouchableOpacity style={styles.buttonNewTask} onPress={() => { 
-                addTask()
-                }}>
-                <Text style={styles.iconButton}>Save</Text>
-            </TouchableOpacity>
-        </View>
+            {   description === null
+                ?
+                <TouchableOpacity style={styles.buttonNewTask} disabled={true}>
+                    <Text style={styles.iconButton}>Salvar</Text>
+                </TouchableOpacity>
+                :
+                <TouchableOpacity style={styles.buttonNewTask} onPress={() => { 
+                    addTask()
+                    }}>
+                    <Text style={styles.iconButton}>Salvar</Text>
+                </TouchableOpacity>
+            }
+        </ImageBackground>
     )
 }
+
+
+
+// {   email === "" || password === "" 
+//         ?
+//             <TouchableOpacity disabled={true} style={styles.buttonRegister}>
+//                 <Text style={styles.textButtonRegister}>Register</Text>
+//             </TouchableOpacity>
+//         :
+//         <TouchableOpacity style={styles.buttonRegister} onPress={register}>
+//                 <Text style={styles.textButtonRegister}>Register</Text>
+//             </TouchableOpacity>
+//         }

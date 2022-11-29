@@ -2,7 +2,7 @@ import React from 'react';
 import { ImageBackground, ScrollView, StyleSheet} from 'react-native';
 // import Header from './src/components/Header'
 import PomodoroTimer from './components/PomoTimer';
-import backgroundTelaPomodoro from "../../../assets/background_2.png"
+//import backgroundTelaPomodoro from "../../../assets/background_2.png"
 
 export default class App extends React.Component {
   render() {
