@@ -34,10 +34,13 @@ export default function App() {
         SplashScreen.preventAutoHideAsync();
 
         const imageAssets = cacheImages([
+          require('./assets/logo.png'),
           require('./assets/background.png'),
           require('./assets/background_new_user.png'),
           require('./assets/background_add_edit.png'),
           require('./assets/background_pomodoro.png'),
+          require('./assets/background_pomodoro_screen.png'),
+          require('./assets/background_home_screen.png'),
         ]);
 
 
@@ -85,25 +88,25 @@ export default function App() {
         <Stack.Screen
           name='Tarefas'
           component={Task}
-          options={{headerTintColor: "#FA5754", headerLeft: null }} //headerStyle: {backgroundColor : "papayawhip"}}}
+          options={{headerTintColor: "#FA5754", headerLeft: null, headerStyle: {backgroundColor: "#fff"} }} //headerStyle: {backgroundColor : "papayawhip"}}}
 
         />
         <Stack.Screen
           name='Nova Tarefa'
           component={NewTask}
-          options={{headerTintColor: "#FA5754"}}
+          options={{headerTintColor: "#FA5754", headerStyle: {backgroundColor: "#fff"}}}
 
         />
         <Stack.Screen
           name='Detalhes'
           component={Details}
-          options={{headerTintColor: "#FA5754"}}
+          options={{headerTintColor: "#FA5754", headerStyle: {backgroundColor: "#fff"}}}
 
         />
         <Stack.Screen
           name='Pomodoro'
           component={PomoTimer}
-          options={{headerTintColor: "#FA5754"}}
+          options={{headerTintColor: "#FA5754", headerStyle: {backgroundColor: "#fff"}}}
         />
         {/* <Stack.Screen
           name='PomoTimer'

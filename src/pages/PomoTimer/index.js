@@ -7,11 +7,14 @@ import PomodoroTimer from './components/PomoTimer';
 export default class App extends React.Component {
   render() {
     return (
-      <ScrollView style={styles.container}>
-        {/* <ImageBackground source={backgroundTelaPomodoro} resizeMode="stretch="> */}
+      // <ScrollView style={styles.container}>
+        <ImageBackground source={require('../../../assets/background_pomodoro_screen.png')} resizeMode="streach" style={styles.container}>
+        <ScrollView>
+
           <PomodoroTimer />
-        {/* </ImageBackground> */}
-      </ScrollView>
+        </ScrollView>
+        </ImageBackground>
+      // </ScrollView>
     );
   }
 }

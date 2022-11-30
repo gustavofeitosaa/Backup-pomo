@@ -1,5 +1,5 @@
 import React, { useState, useEffect }  from "react";
-import { SafeAreaView, View, Text, TouchableOpacity, FlatList, Image, Alert, Button } from "react-native";
+import { SafeAreaView, View, Text, TouchableOpacity, FlatList, Image, Alert, Button, ImageBackground } from "react-native";
 //import PomoIcon from "../../../assets/icon_tela_pomo.png"
 //import database from "../../config/firebaseconfig";
 // import { database } from "../../config/firebaseconfig";
@@ -65,7 +65,7 @@ export default function Task ({ navigation, route }) {
     useEffect(() => {
         //dps de collection eu coloquei .orderBy('createdAt','desc'). e não foi
         //database.collection("ToDos").onSnapshot((query) => {
-        database.collection(route.params.idUser).orderBy('createdAt', 'asc').onSnapshot((query) => {   //tem q ver como dar um orderBy para ordenar as tarefas direito
+        database.collection(route.params.idUser).orderBy('createdAt', 'desc').onSnapshot((query) => {   //tem q ver como dar um orderBy para ordenar as tarefas direito
             const list = [];  
             query.forEach((doc) => {
                 list.push({...doc.data(), id: doc.id});
@@ -99,7 +99,7 @@ export default function Task ({ navigation, route }) {
 
     return (
         //vamos ter um estilo nessa view para podermos alinhar nosso ícone e nossa descrição
-        <View style={styles.container}>
+        <ImageBackground source={require('../../../assets/background_home_screen.png')} resizeMode='strech' style={styles.container}>
             <FlatList
                 //isso é pra n mostrar o scroll e n atrapalhar nosso estilo
                 // style={{alignSelf: "stretch", backgroundColor: "green"}}
@@ -118,7 +118,7 @@ export default function Task ({ navigation, route }) {
                             textStyle={{ fontFamily: "JosefinSans-Regular" }}
                             onPress={(isClicked: boolean) => {}}
                         /> */}
-                    <View style={{flexDirection: "row", height: 40, width: "95%", }}>
+                    <View style={{flexDirection: "row", height: 40, width: "95%", backgroundColor: "#fff", borderRadius: 20, marginTop: 5 }}>
                         <TouchableOpacity style={styles.deleteTasks} onPress={()=> { 
                             createTwoButtonAlert(item.id)
                             
@@ -139,12 +139,12 @@ export default function Task ({ navigation, route }) {
                         <View style={{justifyContent: "center", flex: 1, marginHorizontal: 15}}>
                             <BouncyCheckbox
                                 isChecked={item.status}
-                                style={{}}
+                                style={{flex: 1, paddingRight: 10}}
                                 size={25}
                                 fillColor="#0D9F6F"
-                                unfillColor="#FFFFFF"
+                                unfillColor="#fff"
                                 text={item.description}
-                                iconStyle={{ borderColor: "red" }}
+                                // iconStyle={{ borderColor: "red" }}
                                 innerIconStyle={{ borderWidth: 2 }}
                                 //textStyle={{ fontFamily: "JosefinSans-Regular" }}
                                 onPress={(isChecked) => { checkToDoItem(item, isChecked) }}
@@ -196,7 +196,7 @@ export default function Task ({ navigation, route }) {
                     <TouchableOpacity style={styles.buttonPomo} onPress={()=> navigation.navigate("Pomodoro", { idUser: route.params.idUser })} >
                         {/* <Text style={styles.iconButton}>T</Text> */}
                         {/* <Image source={PomoIcon} style={{borderWidth: 1, alignSelf: "center", width: 80, height: 80}} /> */}
-                        <MaterialIcons name="timer" size={52} color="#FA5754" />
+                        <MaterialIcons name="timer" size={50} color="#FA5754" />
                         {/* <FontAwesome name="plus" size={23} color="#FA5754"></FontAwesome> */}
                     </TouchableOpacity>
                     </View>
@@ -213,6 +213,6 @@ export default function Task ({ navigation, route }) {
             {/* <TouchableOpacity style={styles.buttonPomodoro} onPress={() => navigation.navigate("Pomodoro")} >
                 <FontAwesome name="hourglass-end" size={63} color="#FA5754"></FontAwesome>           
             </TouchableOpacity> */}
-        </View>
+        </ImageBackground>
     )
 }

@@ -27,7 +27,7 @@ export default function NewTask ({ navigation, route }) {
     return (
         <ImageBackground source={require("../../../assets/background_add_edit.png")} style={styles.container}>
             <Text style={styles.label}>Descrição</Text>
-            <TextInput style={styles.input} placeholder="Ex: estudar javascript" onChangeText={setDescription} value={description}/>
+            <TextInput style={styles.input} placeholder="Ex: estudar javascript" maxLength={50} onChangeText={setDescription} value={description}/>
             {   description === null
                 ?
                 <TouchableOpacity style={styles.buttonNewTask} disabled={true}>

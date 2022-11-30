@@ -3,13 +3,13 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#fff",
+        backgroundColor: "#EEEEED",
         paddingTop: 5,
     },
     Tasks: {
         width: "95%",
         flexDirection: "row",
-        //justifyContent: "center",
+        justifyContent: "center",
         marginRight: "auto",
         marginLeft: "auto",
         marginTop: 5,
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
         width: 50,
         height: 50,
         padding: 10,
-        //backgroundColor: "#FA5754",
+        backgroundColor: "#fff",
         borderColor: "#FA5754",
         //marginLeft: 15,
         borderWidth: 1,
@@ -52,6 +52,11 @@ const styles = StyleSheet.create({
     buttonPomo:{
         // borderColor: "#FA5754",
         // borderWidth: 1,
+        // padding: 4,
+        // borderRadius: 10,
+        marginTop: 10,
+        //backgroundColor: "#fff",
+        //borderColor: "#FA5754"
         // //width: 70,
         // //height: 70,
         

@@ -32,7 +32,7 @@ export default function Details ({navigation, route}) {
     return (
         <ImageBackground source={require("../../../assets/background_add_edit.png")} style={styles.container}>
             <Text style={styles.label}></Text>
-            <TextInput style={styles.input} placeholder="Ex: estudar javascript" onChangeText={setDescriptionEdit} value={descriptionEdit}/>
+            <TextInput style={styles.input} placeholder="Ex: estudar javascript" maxLength={50} onChangeText={setDescriptionEdit} value={descriptionEdit}/>
             <TouchableOpacity style={styles.buttonDetails} onPress={() => { 
                 editTask(descriptionEdit, idTask);
                 }}>

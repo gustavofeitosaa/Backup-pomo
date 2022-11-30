@@ -44,7 +44,7 @@ class TimerButtons extends React.Component {
 const styles=StyleSheet.create({
 	container:{
 		flex: 1,
-		width: "100%",
+		width: "75%",
 		flexDirection: "row" ,
 		marginLeft: "auto",
 		marginRight: "auto", 
@@ -56,7 +56,7 @@ const styles=StyleSheet.create({
 		alignItems: "center",
 		backgroundColor: "#FA5754", //FCA311
 	    padding: 15,
-		paddingHorizontal: 30,
+		paddingHorizontal: 25,
 	    flexDirection: "row" ,
 	    borderRadius: 15,
 		textAlign: "center"

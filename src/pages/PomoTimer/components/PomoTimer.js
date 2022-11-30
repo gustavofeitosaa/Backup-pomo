@@ -155,7 +155,7 @@ class PomodoroTimer extends React.Component {
 		return (
 			<View style={styles.container}>
 				<View style={styles.row}>
-					<View style={[styles.inputWrap, {borderColor: "#FA5754", borderWidth: 1}]}>
+					<View style={[styles.inputWrap, {borderColor: "#FA5754", borderWidth: 1, backgroundColor: "#fff"}]}>
 
 						<Text style={styles.textStylePomodoro}>Pomodoro</Text>
 
@@ -177,7 +177,7 @@ class PomodoroTimer extends React.Component {
 
                         </View>
 					</View>
-					<View style={[styles.inputWrap, {borderColor: "#0D9F6F", borderWidth: 1}]}>
+					<View style={[styles.inputWrap, {borderColor: "#0D9F6F", borderWidth: 1, backgroundColor: "#fff"}]}>
 
 						<Text style={styles.textStyleBreak}>Intervalo</Text>
 
