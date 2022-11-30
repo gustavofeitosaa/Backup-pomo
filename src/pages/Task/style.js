@@ -20,17 +20,17 @@ const styles = StyleSheet.create({
         paddingLeft: 15,
         //backgroundColor: "red",
     },
-    descriptionTask: {
-        width: "75%",
-        alignContent: "flex-start", //quero q ele comece alinhado a esquerda
-        backgroundColor: "#f5f5f5cf",
-        padding: 12,
-        paddingHorizontal: 20,
-        borderRadius: 50,
-        marginBottom: 5,
-        marginRight: 15,
-        color: "#282b2db5",
-    },
+    // descriptionTask: {
+    //     width: "75%",
+    //     alignContent: "flex-start", //quero q ele comece alinhado a esquerda
+    //     backgroundColor: "#f5f5f5cf",
+    //     padding: 12,
+    //     paddingHorizontal: 20,
+    //     borderRadius: 50,
+    //     marginBottom: 5,
+    //     marginRight: 15,
+    //     color: "#282b2db5",
+    // },
     buttonNewTask: {
         //position: "absolute",
         // width: 60,
