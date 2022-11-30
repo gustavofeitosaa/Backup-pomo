@@ -10,6 +10,9 @@ import Login from './src/pages/Login';
 import NewUser from './src/pages/NewUser';
 import PomoTimer from './src/pages/PomoTimer';
 
+import { LogBox } from 'react-native';
+
+
 import * as SplashScreen from 'expo-splash-screen';
 import { Asset } from 'expo-asset';
 import React, { useState, useEffect } from "react";
@@ -53,8 +56,8 @@ export default function App() {
         SplashScreen.hideAsync();
       }
     }
-
       loadResourcesAndDataAsync();
+      LogBox.ignoreLogs(['AsyncStorage has been extracted from react-native core and will be removed in a future release.']);
     }, []);
 
     if (!appIsReady) {
