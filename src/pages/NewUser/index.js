@@ -73,7 +73,7 @@ export default function NewUser ({ navigation }) {
                 </View>
 
                 <View style={{width: "100%",}}>
-                    <Text style={{ width: "90%", paddingBottom: 5, paddingLeft: 10, color: "#838383", fontSize: 17}}>Confirmar senha</Text>
+                    <Text style={{ width: "90%", marginRight: "auto", marginLeft: "auto",color: "#838383", fontSize: 17, paddingBottom: 5, paddingLeft: 10,}}>Confirmar senha</Text>
                     <TextInput
                         style={styles.input}
                         autoCorrect={false} 

@@ -2,6 +2,7 @@
   "expo": {
     "name": "PomoTimer",
     "slug": "pomotimer",
+    "description": "Este é um aplicativo que vai te ajudar a combater a procrastinação.",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
