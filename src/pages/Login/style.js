@@ -2,33 +2,26 @@ import { Platform, StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1, //primeiro vamos centralizar por isso o flex 1
+        flex: 1, 
         backgroundColor: "transparent",
         alignItems: "center",
         justifyContent: "center",
-        //uma coisa q iremos fazer tb é adicionar uma margem pra cada plataforma, então se for IOS n precisa fazer nenhuma margem, mas se for Android a gnt poderia dar um padding 60 pra ele poder ficar um pouco melhor
         paddingTop: Platform.OS === "ios" ? 0 : 50,
     },
     containerLogo: {
         flex: 1,
-        //marginTop: 80,
         justifyContent: "center", // para alinhar verticalmente no centro
         alignItems: "center"
         // não precisa botar align items pois ja foi botado no container
     },
     containerInputs: {
-        //vou falar q ele vai ser flex 1 tb, pq ambos vão se dividir no mesmo tamanho da tela 
         alignItems: "center", //alinha tudo no centro q tem dentro desse container
         justifyContent: "center",
         width: "90%",
-        //backgroundColor: "red",
-        // marginBottom: 85,
-        // marginTop: 75,
-        //marginVertical: 70
+        
     },
     title: {
         fontSize: 48,
-        //lineHeight: 52, //Se liga q sou eu testando essa propriedade !!!!!!!!!!!!!
         color: "#FA5754",
         marginBottom: 10,
         fontWeight: "bold",

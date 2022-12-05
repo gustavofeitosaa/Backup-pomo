@@ -1,9 +1,9 @@
 import React from 'react';
-import { Platform, StyleSheet, Text, View, TextInput } from 'react-native';
+import { View } from 'react-native';
 import TimerHeader from './TimerHeader'
 import TimerDisplay from './TimerDisplay'
 import TimerButtons from './TimerButtons'
-import {Vibration} from 'react-native'
+import { Vibration } from 'react-native'
 
 class Timer extends React.Component {
 
@@ -15,7 +15,7 @@ class Timer extends React.Component {
 		}
 	}
 
-	// gets called when a stream of new props arrive from parent component
+	// é chamado quando um fluxo de novos adereços chega do componente parental
 	UNSAFE_componentWillReceiveProps(nextProps) {
     	this.setState({ running: false, time: nextProps.period * 60 });
 		if(this.state.running === true && this.state.time == 0)
@@ -44,7 +44,7 @@ class Timer extends React.Component {
 		)
 	}
 
-	// Invoked immediately after update occurs
+	// Invocada imediatamente após a atualização
 	componentDidUpdate() {
 		if(this.state.running === true && this.state.time == 0)
 		{
@@ -59,8 +59,8 @@ class Timer extends React.Component {
 		}
 	}
 
-	// gets triggered when Play button is pressed
- 	handlePlay = () => {
+	// é acionada quando o botão Play é pressionado
+	handlePlay = () => {
 		this.setState({
 			running: true
 		})
@@ -71,7 +71,7 @@ class Timer extends React.Component {
 		}, 1000)
 	}
 
-	//gets triggered when Pause button is pressed
+	// é acionada quando o botão Pause é pressionado
 	handlePause = () => {
 		clearInterval(this.timerId)
 		this.setState({
@@ -79,7 +79,7 @@ class Timer extends React.Component {
 		})
 	}
 
-	// gets triggered when Reset button is pressed
+	// é acionada quando o botão Reset é pressionado
 	handleReset = () => {	
 		clearInterval(this.timerId)
 		this.setState({
@@ -90,15 +90,3 @@ class Timer extends React.Component {
 }
 
 export default Timer;
-
-const styles = StyleSheet.create({
-  textStyle: {
-    color: "#C2362B",
-    fontSize: 25,
-    fontWeight: "500",
-    letterSpacing: 1.5,
-    //fontFamily: Platform.OS == "android" ? "notoserif" : "system",
-    marginTop: 40,
-    padding: 20
-  }
-});

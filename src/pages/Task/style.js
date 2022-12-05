@@ -20,17 +20,6 @@ const styles = StyleSheet.create({
         paddingLeft: 15,
         //backgroundColor: "red",
     },
-    // descriptionTask: {
-    //     width: "75%",
-    //     alignContent: "flex-start", //quero q ele comece alinhado a esquerda
-    //     backgroundColor: "#f5f5f5cf",
-    //     padding: 12,
-    //     paddingHorizontal: 20,
-    //     borderRadius: 50,
-    //     marginBottom: 5,
-    //     marginRight: 15,
-    //     color: "#282b2db5",
-    // },
     buttonNewTask: {
         //position: "absolute",
         // width: 60,
@@ -50,19 +39,7 @@ const styles = StyleSheet.create({
         // alignItems: "center",
     },
     buttonPomo:{
-        // borderColor: "#FA5754",
-        // borderWidth: 1,
-        // padding: 4,
-        // borderRadius: 10,
         marginTop: 10,
-        //backgroundColor: "#fff",
-        //borderColor: "#FA5754"
-        // //width: 70,
-        // //height: 70,
-        
-        // justifyContent: "center",
-        // alignItems: "center",
-        // borderRadius: 80
     },
     iconButton: {
         color: "#838383",

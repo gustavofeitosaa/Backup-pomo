@@ -1,11 +1,9 @@
 import React from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 class TimerHeader extends React.Component {
 
-	// handles the display of timer header
-
-
+	// trata do controle da exibição do cabeçalho do cronômetro
 	timerHeader = () => {
 		if(this.props.intervalType === "Working")
 		{
@@ -25,7 +23,6 @@ class TimerHeader extends React.Component {
 			}	
 		}
 	}
-
 	
 	render() {
 	

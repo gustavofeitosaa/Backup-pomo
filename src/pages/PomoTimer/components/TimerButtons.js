@@ -3,22 +3,18 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { FontAwesome } from "@expo/vector-icons";
 
 class TimerButtons extends React.Component {
-	//state = {};
-
-	//renders pause, play and reset buttons
+	
 	render() {
 		if(this.props.running === true)
 		{
 			return (
 				<View style={styles.container}>
 					<TouchableOpacity style={styles.buttonStyle} onPress={this.props.pause}>
-						{/* <Text style={styles.buttonText}>Pause</Text> */}
-						{/* <Text><FontAwesome5 name="pause"  size={44} color="#FA5754" style={{}}/></Text> */}
 						<FontAwesome name="pause" size={44} color="#6C0E23">
                             </FontAwesome>
 					</TouchableOpacity>
+
 					<TouchableOpacity style={styles.buttonStyle} onPress={this.props.reset}>
-						{/* <Text style={styles.buttonText}>Reset</Text> */}
 						<FontAwesome name="repeat" size={44} color="#6C0E23">
                             </FontAwesome>
 					</TouchableOpacity>
@@ -30,7 +26,6 @@ class TimerButtons extends React.Component {
 			return(
 				<View  style={[styles.container, {marginRight: "auto", marginLeft: "auto"}]}>
 					<TouchableOpacity style={styles.buttonStyle} onPress={this.props.play}>
-						{/* <Text style={styles.buttonText}>Play</Text> */}
 						<Text>  <FontAwesome name="play" size={44} color="#6C0E23"></FontAwesome></Text>
 					</TouchableOpacity>
 				</View>
@@ -48,7 +43,6 @@ const styles=StyleSheet.create({
 		marginRight: "auto", 
 		justifyContent: 'space-evenly',
 		marginBottom: 20,
-		//backgroundColor: "black",
 	},
 	buttonStyle:{
 		alignItems: "center",

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform, StyleSheet, Text, View, TextInput, ScrollView, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
+import { Platform, StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import { FontAwesome } from "@expo/vector-icons";
 import Timer from './Timer'
 
@@ -14,10 +14,9 @@ class PomodoroTimer extends React.Component {
 		}
 	}
 
-	// handles completion of timer
+	// trata da conclusão do cronômetro
 	handleTimerCompleted = () => {
 		//let contador = this.state.points + 1;
-
 		if(this.state.intervalType === "Working")
 		{
 			this.setState({
@@ -34,7 +33,7 @@ class PomodoroTimer extends React.Component {
 		}
 	}
 
-	// gets triggered on change of worktimer text
+	// é acionada quando o usuário muda o texto no TextInput do Foco
 	handleWorkTime = (text) =>
 	{
 		if(text >= 0.1 && text <= 99)
@@ -121,7 +120,7 @@ class PomodoroTimer extends React.Component {
         }
     }
 
-	// gets triggered on change of breaktimer text
+	// é acionada quando o usuário muda o texto no TextInput do Intervalo
 	handleBreakTime = (text) =>{
 		if(text >= 0.1 && text <= 99)
 		{
@@ -138,7 +137,7 @@ class PomodoroTimer extends React.Component {
 		}
 	}
 
-	// called to set the timer's time
+	// Chamada para definir o tempo do cronômetro
 	handleTime = () => {
 		if(this.state.intervalType === "Working")
 		{
@@ -167,7 +166,7 @@ class PomodoroTimer extends React.Component {
                                 <FontAwesome name='angle-left' size={38} color="#FA5754" style={{paddingHorizontal: 10}}/>   
                             </TouchableOpacity>
 
-						<TextInput  style={{flex: 1, textAlign: 'center',paddingHorizontal: 10 , color: "#FA5754", fontSize: 25, fontWeight: "400", marginHorizontal: 10 }}  keyboardType={Platform.OS == "android" ? "numeric" : "numbers-and-punctuation"} defaultValue={''+this.state.workTime}  maxLength={3} onChangeText={this.handleWorkTime}  selectTextOnFocus />
+							<TextInput  style={{flex: 1, textAlign: 'center',paddingHorizontal: 10 , color: "#FA5754", fontSize: 25, fontWeight: "400", marginHorizontal: 10 }}  keyboardType={Platform.OS == "android" ? "numeric" : "numbers-and-punctuation"} defaultValue={''+this.state.workTime}  maxLength={3} onChangeText={this.handleWorkTime}  selectTextOnFocus />
 
                             <TouchableOpacity   style={{justifyContent: "center"}} onPress={() => {
                                 this.workArrowRight()
@@ -177,6 +176,7 @@ class PomodoroTimer extends React.Component {
 
                         </View>
 					</View>
+					
 					<View style={[styles.inputWrap, {borderColor: "#0D9F6F", borderWidth: 1, backgroundColor: "#fff"}]}>
 
 						<Text style={styles.textStyleBreak}>Intervalo</Text>
@@ -200,16 +200,14 @@ class PomodoroTimer extends React.Component {
 
 					</View>
 				</View>
-				{/* <View style={{backgroundColor: "black", width: "40%", marginRight: "auto", marginLeft: "auto", }}>
-					<Text style={{marginRight: "auto", marginLeft: "auto", backgroundColor: "#EB8258", borderRadius: 17, borderWidth: 2, padding: 10}}>Contador: {this.state.points}</Text>
-				</View> */}
+				
 				<Timer
 					intervalType={this.state.intervalType}
 					Oncomplete={this.handleTimerCompleted}
 					period={time}
 				/>
 			</View>
-			)
+		)
 	}
 }
 export default PomodoroTimer;
@@ -217,32 +215,21 @@ export default PomodoroTimer;
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		//backgroundColor: "black"
         paddingTop: 20,
-		//paddingBottom: 200,
 	  },
 	row: {
-		//flex: 1,
 		flexDirection: "column",
 		marginTop: 10,
         marginHorizontal: "auto",
         marginVertical: "auto",
-		//backgroundColor: "gray"
   	},
   	inputWrap: {
-		//flex: 10,
-		//width: "90%",
 		flexDirection: "row",
-		// height: 50,
-        // width: "90%",
 		// alignItems: "baseline",
 		//padding: 20,
 		//backgroundColor: "gray",
 		borderRadius: 10,
-		// flexDirection:"row",
 		justifyContent: "space-between",
-		
-        //borderBottomWidth: 1,
 		marginVertical: 10,
 		marginHorizontal: 20,
         paddingHorizontal: 10,
@@ -257,7 +244,6 @@ const styles = StyleSheet.create({
 		//fontFamily: Platform.OS == "android" ? "notoserif" : "system",
 		//marginTop: 40,
 		padding: 10,
-        //backgroundColor: "black"
 	},
     textStyleBreak: {
 		color: "#0D9F6F",
@@ -268,6 +254,5 @@ const styles = StyleSheet.create({
 		//fontFamily: Platform.OS == "android" ? "notoserif" : "system",
 		//marginTop: 40,
 		padding: 10,
-        //backgroundColor: "black"
 	},
 	});

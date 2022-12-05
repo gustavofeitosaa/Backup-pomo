@@ -1,10 +1,8 @@
-
 import { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, ImageBackground } from "react-native";
+import { Text, TextInput, TouchableOpacity, ImageBackground } from "react-native";
 
 import firebase from "../../config/firebaseconfig";
 import styles from "./style";
-
 
 //além do navigation, pra poder funcionar, quando a gnt salvar, fazer a edição, navegar pro tasks de novo, vamo ter q passar o routes
 //q é como conseguimos pegar os parâmetros
@@ -14,7 +12,7 @@ export default function Details ({navigation, route}) {
     //quando carregar a pagina de details, vai carregar com o nosso state graças ao (q veio do) route.params.description q é o q ta salvo no Banco!!!!
     //quando dermos o onChangeText vai alterar, pra dair então quando o usuario fizer a alteração e clicar no botão de salvar, ele chama a função Edit q vamos criar aqui
     const [descriptionEdit, setDescriptionEdit] = useState(route.params.description);
-    const database = firebase.firestore();// 1h 33 min ele explica essa parte. Basicamente, ja estamos recuperando o route.params.id da Task, e está recuperando tb a descrição da nossa task q a gnt ta sentando dentro de descriptionEdit
+    const database = firebase.firestore(); //Basicamente, ja estamos recuperando o route.params.id da Task, e está recuperando tb a descrição da nossa task q a gnt ta sentando dentro de descriptionEdit
     const idTask = route.params.id
 
     function editTask(description, id) {
