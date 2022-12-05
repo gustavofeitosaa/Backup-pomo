@@ -2,7 +2,7 @@
   "expo": {
     "name": "PomoTimer",
     "slug": "pomotimer",
-    "description": "Este é um aplicativo que vai te ajudar a combater a procrastinação.",
+    "description": "O PomoTimer oferece funcionalidades que se baseiam na famosa técnica pomodoro, como forma de combater as distrações que levam a procrastinação. Ele possiblita a organização de uma 'check-list' de tarefas, com a aplicação da técnica pomodoro, que pode ser ajustado de acordo com as suas necessidades de trabalho, estudo ou entretenimento. Este aplicativo também desfruta de uma interface clean, simples e de fácil interação, contando ainda com uma boa performance, tudo isso voltado para proporcionar uma melhor experiência para o usuário.",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
