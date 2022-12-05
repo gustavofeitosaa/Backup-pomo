@@ -7,14 +7,33 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         //uma coisa q iremos fazer tb é adicionar uma margem pra cada plataforma, então se for IOS n precisa fazer nenhuma margem, mas se for Android a gnt poderia dar um padding 60 pra ele poder ficar um pouco melhor
-        paddingTop: Platform.OS === "ios" ? 50 : 150,
+        paddingTop: Platform.OS === "ios" ? 100 : 150,
     },
     title: {
         fontSize: 22, //na tela de login o size é 48
         //lineHeight: 52, //Se liga q sou eu testando essa propriedade !!!!!!!!!!!!!
         color: "#FA5754",
-        marginBottom: 20,
+        paddimgBottom: 10,
         fontWeight: "bold",
+        // backgroundColor: "blue",
+        // width: "90%",
+        // height: 80
+    },
+    containerInputs: {
+        //vou falar q ele vai ser flex 1 tb, pq ambos vão se dividir no mesmo tamanho da tela 
+        alignItems: "center", //alinha tudo no centro q tem dentro desse container
+        justifyContent: "center",
+        width: "90%",
+        paddingVertical: 20,
+        //height: "100%",
+        //flex: 1,
+        //height: 500,
+        //backgroundColor: "red",
+        // marginBottom: 85,
+        // marginTop: 75,
+        //marginVertical: 70
+        marginRight: "auto",
+        marginLeft: "auto",
     },
     input: {
         backgroundColor: "#FFF",
@@ -62,10 +81,11 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     login: {
-        position: "relative",
-        bottom: 70,
-        right: 0,
-        left: 0,
+        // position: "absolute",
+        // bottom: 70,
+        // right: 0,
+        // left: 0,
+        marginTop: 30,
         textAlign: "center",
         color: "#838383", //#838383   poderia ser tb #4d5156
      //   color: "#838383", //como é um link, é interessante usar cores mais próximas do Azul (como exemplo a #1877f2 ou #279AF1), então isso é uma técnica na produção de software, pois o nosso cérebro tem uma tendência a clicar em coisas azul. Aqui iremos usar um azul muito usado em diversas aplicações

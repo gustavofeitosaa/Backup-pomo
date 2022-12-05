@@ -57,7 +57,7 @@ export default function App() {
       }
     }
       loadResourcesAndDataAsync();
-      LogBox.ignoreLogs(['AsyncStorage has been extracted from react-native core and will be removed in a future release.']);
+      LogBox.ignoreLogs(['AsyncStorage has been extracted from react-native core and will be removed in a future release.', 'Sending `onAnimatedValueUpdate` with no listeners registerd.']);
     }, []);
 
     if (!appIsReady) {

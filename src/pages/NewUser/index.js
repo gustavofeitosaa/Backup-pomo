@@ -44,71 +44,82 @@ export default function NewUser ({ navigation }) {
         }
     }
 
-    return <ImageBackground source={require("../../../assets/background_new_user.png")} resizeMode="stretch" style={{flex: 1}}>
+    return <ImageBackground source={require("../../../assets/background_new_user.png")} resizeMode={Platform.OS == "android" ? "stretch" : "stretch" } style={{flex: 1}}>
 
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container} >
+
         <Text style={styles.title}>Criar uma conta PomoTimer</Text>
-        <Text style={{ width: "90%", paddingBottom: 5, paddingLeft: 10, color: "#838383", fontSize: 17}}>E-mail</Text>
-        <TextInput 
-            style={styles.input} 
-            placeholder='digite seu endereço de e-mail'
-            type='text'
-            onChangeText={(text) => setEmail(text)}
-            value={email}
+        <View style={styles.containerInputs}>
+
+            <View style={{width: "100%"}}>
+                <Text style={{ width: "90%", marginRight: "auto", marginLeft: "auto",color: "#838383", fontSize: 17, paddingBottom: 5, paddingLeft: 10,}}>E-mail</Text>
+                <TextInput 
+                    style={styles.input} 
+                    placeholder='digite seu endereço de e-mail'
+                    autoCorrect={false}
+                    type='text'
+                    onChangeText={(text) => setEmail(text)}
+                    value={email}
+                    />
+            </View>
+
+            <View style={{width: "100%",}}>
+                <Text style={{ width: "90%", marginRight: "auto", marginLeft: "auto",color: "#838383", fontSize: 17, paddingBottom: 5, paddingLeft: 10,}}>Senha</Text>
+                <TextInput
+                    style={styles.input}
+                    autoCorrect={true} 
+                    secureTextEntry={true}
+                    placeholder='digite sua senha'
+                    type='text'
+                    onChangeText={(text) => setPassword(text)}
+                    value={password}
+                />
+            </View>
+            
+            <Text style={{ width: "90%", paddingBottom: 5, paddingLeft: 10, color: "#838383", fontSize: 17}}>Confirmar senha</Text>
+            <TextInput
+                style={styles.input}
+                autoCorrect={false} 
+                secureTextEntry={true}
+                placeholder='digite novamente sua senha'
+                type='text'
+                onChangeText={(text) => setConfirmPassword(text)}
+                value={confirmPassword}
             />
-        <Text style={{ width: "90%", paddingBottom: 5, paddingLeft: 10, color: "#838383", fontSize: 17}}>Senha</Text>
-        <TextInput
-            style={styles.input}
-            autoCorrect={false} 
-            secureTextEntry={true}
-            placeholder='digite sua senha'
-            type='text'
-            onChangeText={(text) => setPassword(text)}
-            value={password}
-        />
-        <Text style={{ width: "90%", paddingBottom: 5, paddingLeft: 10, color: "#838383", fontSize: 17}}>Confirmar senha</Text>
-        <TextInput
-            style={styles.input}
-            autoCorrect={false} 
-            secureTextEntry={true}
-            placeholder='digite novamente sua senha'
-            type='text'
-            onChangeText={(text) => setConfirmPassword(text)}
-            value={confirmPassword}
-        />
-        {/* teremos os campos/inputs para email e senha e tb, tudo vai setar os states pra gente (email e password) basicamente a msm coisa q a de login */}
-        {/* outra coisa q vamos ter aqui, é se tiver um Erro Register , precisamos a gnt vai imprimir, se os inputs estiverem em branco, iremos aproveitar todo cod da tela de login */}
-        {errorRegister === true
-        ?
-        <View style={styles.contentAlert}>
-            <MaterialCommunityIcons
-                name="alert-circle"
-                size={24}
-                color='#bdbdbd'
-            />
-            <Text style={styles.warningAlert}>e-mail ou senha inválidos</Text>
+            {/* teremos os campos/inputs para email e senha e tb, tudo vai setar os states pra gente (email e password) basicamente a msm coisa q a de login */}
+            {/* outra coisa q vamos ter aqui, é se tiver um Erro Register , precisamos a gnt vai imprimir, se os inputs estiverem em branco, iremos aproveitar todo cod da tela de login */}
+            {errorRegister === true
+            ?
+            <View style={styles.contentAlert}>
+                <MaterialCommunityIcons
+                    name="alert-circle"
+                    size={24}
+                    color='#bdbdbd'
+                />
+                <Text style={styles.warningAlert}>e-mail ou senha inválidos</Text>
+            </View>
+            :
+            <View/>  
+            }
+            {   email === "" || password === "" || confirmPassword === "" 
+            ?
+                <TouchableOpacity disabled={true} style={styles.buttonRegister}>
+                    <Text style={styles.textButtonRegister}>Registrar</Text>
+                </TouchableOpacity>
+            :
+            <TouchableOpacity style={styles.buttonRegister} onPress={register}>
+                    <Text style={styles.textButtonRegister}>Registrar</Text>
+                </TouchableOpacity>
+            }    
+            {/* conseguimos aproveitar boa parte do código da tela de login, o q falta implementar agr, caso dps disso tudo acontecer fizer as verificações, caso o usuario ja tenha cadastro, de repente ele so clicar pra ver como é a página e tudo mais, a gnt pode fazer um botão q volta para a página de login então */}
         </View>
-        :
-        <View/>  
-        }
-        {   email === "" || password === "" || confirmPassword === "" 
-        ?
-            <TouchableOpacity disabled={true} style={styles.buttonRegister}>
-                <Text style={styles.textButtonRegister}>Registrar</Text>
-            </TouchableOpacity>
-        :
-        <TouchableOpacity style={styles.buttonRegister} onPress={register}>
-                <Text style={styles.textButtonRegister}>Registrar</Text>
-            </TouchableOpacity>
-        }    
-        {/* conseguimos aproveitar boa parte do código da tela de login, o q falta implementar agr, caso dps disso tudo acontecer fizer as verificações, caso o usuario ja tenha cadastro, de repente ele so clicar pra ver como é a página e tudo mais, a gnt pode fazer um botão q volta para a página de login então */}
+            <Text style={styles.login}>
+                Já possui uma conta?
+                <Text style={styles.linkLogin} onPress={() => navigation.navigate("Login")}> Login...</Text> 
+                {/* essa linha acima será um Link para o NewUser */}
+            </Text>
+                {/* É legal fazer uma view no final do componente, para quando o teclado subir e por causa do KeyboardAvoidingView, ficar ainda uma margem e n ficar rente aos campos */}
     </KeyboardAvoidingView>
-        <Text style={styles.login}>
-            Já possui uma conta?
-            <Text style={styles.linkLogin} onPress={() => navigation.navigate("Login")}> Login...</Text> 
-            {/* essa linha acima será um Link para o NewUser */}
-        </Text>
-            {/* É legal fazer uma view no final do componente, para quando o teclado subir e por causa do KeyboardAvoidingView, ficar ainda uma margem e n ficar rente aos campos */}
     
     </ImageBackground>
 }

@@ -49,7 +49,7 @@ class Timer extends React.Component {
 		if(this.state.running === true && this.state.time == 0)
 		{
 			clearInterval(this.timerId)
-			Vibration.vibrate([400, 400, 400])
+			Vibration.vibrate([800, 800, 800])
 			this.props.Oncomplete()
 
 		}

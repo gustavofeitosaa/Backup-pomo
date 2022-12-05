@@ -154,7 +154,7 @@ export default function Login ({ navigation }) {
         ]).start();
     }
 
-    return  <ImageBackground source={require("../../../assets/background.png")} style={{flex: 1, paddingBottom: 60,}}>
+    return  <ImageBackground source={require("../../../assets/background.png")} resizeMode={Platform.OS == "android" ? "stretch" : "stretch" } style={{flex: 1, paddingBottom: 60,}}>
         <StatusBar/>
        <View style={styles.containerLogo}>
             <Animated.Image source={require("../../../assets/logo.png")} style={{width: logo.x, height: logo.y, backgroundColor:"transparent"}}/>

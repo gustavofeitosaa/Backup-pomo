@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     buttonLogin: {
-        width: "80%",
+        width: "55%",
         height: 45,
         justifyContent: "center",
         alignItems: "center",

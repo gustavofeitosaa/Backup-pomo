@@ -25,7 +25,7 @@ export default function NewTask ({ navigation, route }) {
     //no textInput nos temos q adicionar um valor (value) e para cada vez q a gnt digita o nosso value ele é nosso propio description.
     //então para cada vez que eu digito, o meu state ele é atualizado, e ele recebe o valor description. Ele seta o valor q ta dando no onChangeTask e manda para o value
     return (
-        <ImageBackground source={require("../../../assets/background_add_edit.png")} style={styles.container}>
+        <ImageBackground source={require("../../../assets/background_add_edit.png")} resizeMode={Platform.OS == "android" ? "stretch" : "stretch" } style={styles.container}>
             <Text style={styles.label}>Descrição</Text>
             <TextInput style={styles.input} placeholder="Ex: estudar javascript" maxLength={50} onChangeText={setDescription} value={description}/>
             {   description === null

@@ -37,7 +37,7 @@ class PomodoroTimer extends React.Component {
 	// gets triggered on change of worktimer text
 	handleWorkTime = (text) =>
 	{
-		if(text >= 0)
+		if(text >= 0.1 && text <= 99)
 		{
 			this.setState({
 				workTime: text
@@ -123,7 +123,7 @@ class PomodoroTimer extends React.Component {
 
 	// gets triggered on change of breaktimer text
 	handleBreakTime = (text) =>{
-		if(text >= 0)
+		if(text >= 0.1 && text <= 99)
 		{
 			this.setState({
 				breakTime:  text
@@ -167,7 +167,7 @@ class PomodoroTimer extends React.Component {
                                 <FontAwesome name='angle-left' size={38} color="#FA5754" style={{paddingHorizontal: 10}}/>   
                             </TouchableOpacity>
 
-						<TextInput  style={{flex: 1, textAlign: 'center',paddingHorizontal: 10 , color: "#FA5754", fontSize: 25, fontWeight: "400", marginHorizontal: 10 }}  keyboardType={Platform.OS == "android" ? "numeric" : "numbers-and-punctuation"} defaultValue={''+this.state.workTime} placeholder = "min" onChangeText={this.handleWorkTime} selectTextOnFocus />
+						<TextInput  style={{flex: 1, textAlign: 'center',paddingHorizontal: 10 , color: "#FA5754", fontSize: 25, fontWeight: "400", marginHorizontal: 10 }}  keyboardType={Platform.OS == "android" ? "numeric" : "numbers-and-punctuation"} defaultValue={''+this.state.workTime}  maxLength={3} onChangeText={this.handleWorkTime}  selectTextOnFocus />
 
                             <TouchableOpacity   style={{justifyContent: "center"}} onPress={() => {
                                 this.workArrowRight()
@@ -189,7 +189,7 @@ class PomodoroTimer extends React.Component {
                                     <FontAwesome name='angle-left' size={38} color="#0D9F6F" style={{paddingHorizontal: 10}}/>   
                             </TouchableOpacity>
 
-                            <TextInput  style={{ flex:1,textAlign: 'center', paddingHorizontal: 10, color: "#0D9F6F", fontSize: 25, fontWeight: "400", marginHorizontal: 10}}  keyboardType={Platform.OS == "android" ? "numeric" : "numbers-and-punctuation"} defaultValue={''+this.state.breakTime} placeholder = "min" onChangeText={this.handleBreakTime} selectTextOnFocus />
+                            <TextInput  style={{ flex:1,textAlign: 'center', paddingHorizontal: 10, color: "#0D9F6F", fontSize: 25, fontWeight: "400", marginHorizontal: 10}}  keyboardType={Platform.OS == "android" ? "numeric" : "numbers-and-punctuation"} defaultValue={''+this.state.breakTime}  maxLength={3} onChangeText={this.handleBreakTime} selectTextOnFocus />
                             
                             <TouchableOpacity   style={{justifyContent: "center"}} onPress={() => {
 								this.breakArrowRight()

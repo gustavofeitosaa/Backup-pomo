@@ -1,9 +1,10 @@
 import React, { useState, useEffect }  from "react";
-import { SafeAreaView, View, Text, TouchableOpacity, FlatList, Image, Alert, Button, ImageBackground } from "react-native";
+import { SafeAreaView, View, Text, TouchableOpacity, FlatList, Image, Alert, Button, ImageBackground, Platform } from "react-native";
 //import PomoIcon from "../../../assets/icon_tela_pomo.png"
 //import database from "../../config/firebaseconfig";
 // import { database } from "../../config/firebaseconfig";
 //import { firebase } from "../../config/firebaseconfig";
+import { LogBox } from 'react-native';
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { Entypo } from '@expo/vector-icons';
 import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons"; //pq vamos usar ele? pq ele já é padrão do expo, e facilita bastante o nosso trabalho. E agora eu poderia utilizar os icones
@@ -63,6 +64,8 @@ export default function Task ({ navigation, route }) {
     //todos os dados dessa collection Tasks ta vindo aqui dentro desse retorno "query", eai podemos fazer o forEach -> query.forEach((dentro do meu retorno, se desse console.log, veria q teria um campo chamado doc q é o documento né) => {e dentro de doc eu quero pegar list.push""eu quero pra cada documento q eu iver la dentro(pra cada task q eu tenha adicionado), eu quero q adiciona no meu const list q é um array, q no final, vamos setar para dentro do nosso Task com o setTask". Então a gnt vai fazer pra cada um, inserir no nosso array, então {...doc.data(), eai pega tb o id: doc.id e ele ja vai setar pra gente, vai inserir na nossa lista})
     //dps q inserir no nosso array, oq a gnt quer q ele faça? q ele adicione no nosso state Task
     useEffect(() => {
+        LogBox.ignoreLogs(['Sending `onAnimatedValueUpdate` with no listeners registerd.']);
+        
         //dps de collection eu coloquei .orderBy('createdAt','desc'). e não foi
         //database.collection("ToDos").onSnapshot((query) => {
         database.collection(route.params.idUser).orderBy('createdAt', 'desc').onSnapshot((query) => {   //tem q ver como dar um orderBy para ordenar as tarefas direito
@@ -99,7 +102,7 @@ export default function Task ({ navigation, route }) {
 
     return (
         //vamos ter um estilo nessa view para podermos alinhar nosso ícone e nossa descrição
-        <ImageBackground source={require('../../../assets/background_home_screen.png')} resizeMode='strech' style={styles.container}>
+        <ImageBackground source={require('../../../assets/background_home_screen.png')} resizeMode={Platform.OS == "android" ? "stretch" : "stretch" } style={styles.container}>
             <FlatList
                 //isso é pra n mostrar o scroll e n atrapalhar nosso estilo
                 // style={{alignSelf: "stretch", backgroundColor: "green"}}
