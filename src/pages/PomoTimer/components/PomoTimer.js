@@ -42,7 +42,11 @@ class PomodoroTimer extends React.Component {
 				workTime: text
 			})
 		}
-		else{
+		else if(text == 0){
+			this.setState({
+				workTime: 1
+			})
+		}else{
 			alert("O tempo informado é inválido. Definindo de volta o valor padrão. Por favor insira um tempo válido.")
 			this.setState({
 				workTime: 25
@@ -50,22 +54,65 @@ class PomodoroTimer extends React.Component {
 		}
 	}
 
+	// é acionada quando o usuário muda o texto no TextInput do Intervalo
+	handleBreakTime = (text) =>{
+		if(text >= 0.1 && text <= 99)
+		{
+			this.setState({
+				breakTime:  text
+			})
+		}
+		else if(text == 0){
+			this.setState({
+				breakTime: 1
+			})
+		}else{
+			alert("O tempo informado é inválido. Definindo de volta o valor padrão. Por favor insira um tempo válido.")
+			this.setState({
+				breakTime: 5
+			})
+		}
+	}
+	
     workArrowLeft = () => {
         let aux = this.state.workTime
 
         if(aux > 1)
         {    
             this.setState({
-                workTime: this.state.workTime - 1
+                workTime: Math.round((this.state.workTime - 1).toFixed(1))
             })
         }
-        else{
-            alert("O tempo informado é inválido. Definindo de volta o valor padrão. Por favor insira um tempo válido.")
+        else if(aux <= 1 && aux > 0.1){
 			this.setState({
-				workTime: 25
+                workTime: (this.state.workTime - 0.1).toFixed(1)
+            })
+		}
+		else{
+            alert("O tempo informado é inválido. Por favor insira um tempo válido.")
+			this.setState({
+				workTime: 1
 			})
         }
     }
+	
+	workArrowRight = () => {
+		let aux = parseInt(this.state.workTime)  
+
+		if(this.state.workTime >= 99)
+		{
+			alert("O tempo informado é inválido. Definindo de volta o valor padrão. Por favor insira um tempo válido.")
+			this.setState({
+				workTime: 25
+			})
+		}
+		else
+		{
+			this.setState({
+				workTime: aux + 1
+			})        
+		}
+	}
 
 	breakArrowLeft = () => {
 		let aux = this.state.breakTime
@@ -73,34 +120,22 @@ class PomodoroTimer extends React.Component {
         if(aux > 1)
         {    
             this.setState({
-                breakTime: this.state.breakTime - 1
+                breakTime: Math.round((this.state.breakTime - 1).toFixed(1))
             })
         }
-        else{
-            alert("O tempo informado é inválido. Definindo de volta o valor padrão. Por favor insira um tempo válido.")
+        else if(aux <= 1 && aux > 0.1){
 			this.setState({
-				breakTime: 5
+                breakTime: (this.state.breakTime - 0.1).toFixed(1)
+            })
+		}
+		else{
+            alert("O tempo informado é inválido. Por favor insira um tempo válido.")
+			this.setState({
+				breakTime: 1
 			})
         }
 	}
 
-    workArrowRight = () => {
-        let aux = parseInt(this.state.workTime)  
-
-        if(this.state.workTime >= 99)
-        {
-            alert("O tempo informado é inválido. Definindo de volta o valor padrão. Por favor insira um tempo válido.")
-			this.setState({
-				workTime: 25
-			})
-        }
-        else
-        {
-            this.setState({
-                workTime: aux + 1
-            })        
-        }
-    }
 
 	breakArrowRight = () => {
         let aux = parseInt(this.state.breakTime)  
@@ -120,22 +155,6 @@ class PomodoroTimer extends React.Component {
         }
     }
 
-	// é acionada quando o usuário muda o texto no TextInput do Intervalo
-	handleBreakTime = (text) =>{
-		if(text >= 0.1 && text <= 99)
-		{
-			this.setState({
-				breakTime:  text
-			})
-		}
-		else
-		{
-			alert("O tempo informado é inválido. Definindo de volta o valor padrão. Por favor insira um tempo válido.")
-			this.setState({
-				breakTime: 5
-			})
-		}
-	}
 
 	// Chamada para definir o tempo do cronômetro
 	handleTime = () => {
